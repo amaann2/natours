@@ -1,7 +1,11 @@
+//? importing required modules
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+
+//? Creating a new Mongoose schema for the User model
 
 const userSchema = mongoose.Schema({
   name: {
@@ -31,7 +35,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, 'A User must have a confirm password'],
     validate: {
-      // THis is only works only create and  save not on findone find etc
+      //! This is only works only on create and  save not on findone find etc
       validator: function (el) {
         return el === this.password;
       },
@@ -48,6 +52,8 @@ const userSchema = mongoose.Schema({
   },
 });
 
+//? Pre-save middleware to hash the password before saving the user to the database
+
 userSchema.pre('save', async function (next) {
   // only run this function if password was actually modified
   if (!this.isModified('password')) return next();
@@ -55,24 +61,28 @@ userSchema.pre('save', async function (next) {
   // Hash the password with the cost 12
   this.password = await bcrypt.hash(this.password, 12);
 
-  // Delete the confirmPassword fiel
+  // Delete the confirmPassword field
   this.confirmPassword = undefined;
   next();
 });
+
+//? Pre-save middleware to set the passwordChangedAt field if the password was modified
+
 userSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-userSchema.pre(/^find/, function (next) {
-  // this. point to current query because this query middleware
+//?  Pre-find middleware to exclude inactive users from query results
 
+userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
 
-// --------------Instance methods ------------------
+//? Instance method to check if a user changed their password after the issuance of a JSON Web Token (JWT)
+
 userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
   if (this.passwordChangedAt) {
     const changeTimeStamp = parseInt(
@@ -84,7 +94,8 @@ userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
   return false;
 };
 
-// checking the password that are in database === Password that user type and in login functionality
+//? Instance method to check if a candidate password matches the user's password
+
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
@@ -92,7 +103,8 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-// generating the random token for forgot password functionality
+//? Instance method to generate a password reset token for the forgot password functionality
+
 userSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');
 
@@ -107,6 +119,7 @@ userSchema.methods.createPasswordResetToken = function () {
 
   return resetToken;
 };
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

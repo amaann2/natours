@@ -8,6 +8,7 @@ const hpp = require('hpp');
 
 const tourRouter = require('./Routes/tourRoutes');
 const userRouter = require('./Routes/userRoutes');
+const reveiwRouter = require('./Routes/reviewRoutes');
 const appError = require('./utils/appError');
 const globalErrorHandler = require('./Controller/globalErrorController');
 
@@ -47,7 +48,7 @@ app.use(
       'ratingAverage',
       'ratingQuantity',
       'price',
-      'maxGroupSize', 
+      'maxGroupSize',
     ],
   })
 );
@@ -58,6 +59,7 @@ app.use(express.static(`${__dirname}/public`));
 // routing
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/reviews', reveiwRouter);
 
 // unhandled route
 app.all('*', (req, res, next) => {

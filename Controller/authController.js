@@ -1,3 +1,5 @@
+//? Importing required modules
+
 const { promisify } = require('util');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
@@ -25,7 +27,6 @@ const createSendToken = (user, statusCode, res) => {
   }
   res.cookie('jwt', token, cookieOptions);
 
-  // Remove the password field from output
   user.password = undefined;
   res.status(statusCode).json({
     status: 'Sucess',
@@ -49,23 +50,23 @@ exports.signup = catchAsync(async (req, res) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  // 1) check if email and password exist
+  // TODO: check if email and password exist
   if (!email || !password) {
     return next(new appError('Please provide email and password', 400));
   }
 
-  // 2)check if user exist && password is correct
+  // TODO: check if user exist && password is correct
   const user = await User.findOne({ email }).select('+password');
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new appError('Incorrect Email and Password', 401));
   }
 
-  // 3)IF everything is ok , send token to client
+  // TODO: IF everything is ok , send token to client
   createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1)  Getting token and check of it's there
+  // TODO:  Getting token and check of it's there
   let token;
   if (
     req.headers.authorization &&
@@ -78,31 +79,31 @@ exports.protect = catchAsync(async (req, res, next) => {
       new appError('You are not logged in! please log  in to access', 401)
     );
   }
-  // 2) Verification Token
+  // TODO: Verification Token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  // 3) Check if user still exists
+  // TODO: Check if user still exists
   const freshUser = await User.findById(decoded.id);
   if (!freshUser) {
     return next(
       new appError('The user belong to this token does no longer exists', 401)
     );
   }
-  // 4) check if user changed password after token was issued
+  //TODO: check if user changed password after token was issued
   if (freshUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new appError('user recently changed password please login again', 401)
     );
   }
 
-  // Grant access to protected route
+  //TODO: Grant access to protected route
   req.user = freshUser;
   next();
 });
 
 exports.restrictTo = (...userRoles) => {
   return (req, res, next) => {
-    // userRoles = ['admin','lead-guide']
+    //? userRoles = ['admin','lead-guide']
     if (!userRoles.includes(req.user.role)) {
       return next(
         new appError('you do not have permission to perform this action', 403)
@@ -113,16 +114,16 @@ exports.restrictTo = (...userRoles) => {
 };
 
 exports.forgortPassword = catchAsync(async (req, res, next) => {
-  // 1) get user based on posted email
+  // TODO: get user based on posted email
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return next(new appError('There is no user with email address', 404));
   }
-  // 2) Generate the random token
+  // TODO: Generate the random token
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  // 3) send it to user email
+  //TODO: send it to user email
   const resetUrl = `${req.protocol}://${req.get(
     'host'
   )}/api/v1/users/resetPassword/${resetToken}`;
@@ -153,7 +154,7 @@ exports.forgortPassword = catchAsync(async (req, res, next) => {
   }
 });
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  // 1) Get user based on token
+  // TODO: Get user based on token
   const hashedToken = crypto
     .createHash('sha256')
     .update(req.params.token)
@@ -163,7 +164,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     passwordResetExpires: { $gt: Date.now() },
   });
 
-  // 2) IF token has not expired , and there is user , set the new password
+  // TODO: IF token has not expired , and there is user , set the new password
   if (!user) {
     return next(new appError('Token is invalid or has expired', 400));
   }
@@ -174,25 +175,27 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetExpires = undefined;
   await user.save();
 
-  // 3) update changePasswordAt property for the user - implemented in the userschma.pre('save')  method
+  // TODO: update changePasswordAt property for the user - implemented in the userschma.pre('save')  method
 
-  // 4) Log the user in , send JWT
+  // TODO: Log the user in , send JWT
 
   createSendToken(user, 200, res);
 });
 
 // this function only perform after user logged in
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  // 1) Get user from collection
+  //TODO: Get user from collection
   const user = await User.findById(req.user.id).select('+password');
-  // 2) Check if POSTed current password is correct
+
+  //TODO: Check if POSTed current password is correct
   if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
     return next(new appError('Your current password is wrong', 401));
   }
-  // 3) If so , update password
+  // TODO: If so , update password
   user.password = req.body.password;
   user.confirmPassword = req.body.confirmPassword;
   await user.save();
-  // 4) Log user in , send JWT
+
+  // TODO: Log user in , send JWT
   createSendToken(user, 200, res);
 });

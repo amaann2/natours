@@ -9,6 +9,7 @@ const {
   getTourStats,
   getMonthlyPlan,
 } = require('./../Controller/tourController');
+
 const authController = require('./../Controller/authController');
 const router = express.Router();
 
