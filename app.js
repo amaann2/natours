@@ -14,15 +14,16 @@ const globalErrorHandler = require('./Controller/globalErrorController');
 
 const app = express();
 
-// Set security Htpps headerss
+//? Set security Htpps headerss
 app.use(helmet());
 
-// Developement Logging
+//? Developement Logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Limit request from same IP
+//? Limit request from same IP
+
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
@@ -30,16 +31,18 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// body-parser , reading data from the body into req.body
+//? body-parser , reading data from the body into req.body
 app.use(express.json({ limit: '10kb' }));
 
-// Data sanitization against nosql query injection
+//? Data sanitization against nosql query injection
 app.use(mongoSanitize());
 
-// Data sanitization against XSS - cross-site scripting
+//? Data sanitization against XSS - cross-site scripting
+
 app.use(xss());
 
-// Prevent parameter pollution
+//? Prevent parameter pollution
+
 app.use(
   hpp({
     whitelist: [
@@ -53,20 +56,24 @@ app.use(
   })
 );
 
-// Serving the static file
+//? Serving the static file
+
 app.use(express.static(`${__dirname}/public`));
 
-// routing
+//? routing
+
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reveiwRouter);
 
-// unhandled route
+//? unhandled route
+
 app.all('*', (req, res, next) => {
   next(new appError(`can't find ${req.originalUrl} on this server`, 404));
 });
 
-// Globar error
+//? Globar error
+
 app.use(globalErrorHandler);
 
 module.exports = app;

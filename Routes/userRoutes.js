@@ -7,6 +7,7 @@ const {
   deleteUser,
   updateMe,
   deleteMe,
+  getMe,
 } = require('./../Controller/userController');
 const {
   signup,
@@ -15,6 +16,7 @@ const {
   forgortPassword,
   protect,
   updatePassword,
+  restrictTo,
 } = require('./../Controller/authController');
 
 const router = express.Router();
@@ -22,16 +24,18 @@ const router = express.Router();
 // authentication
 router.post('/signup', signup);
 router.post('/login', login);
-
 // password reset functionality
 router.post('/forgotPassword', forgortPassword);
 router.patch('/resetPassword/:token', resetPassword);
 
-router.patch('/updateMyPassword', protect, updatePassword);
-router.patch('/updateMe', protect, updateMe);
-router.delete('/deleteMe', protect, deleteMe);
+router.use(protect);
+router.patch('/updateMyPassword', updatePassword);
+router.patch('/updateMe', updateMe);
+router.delete('/deleteMe', deleteMe);
+router.get('/getMe', getMe, getUser);
 
-// user route
+router.use(restrictTo('admin'));
+
 router.route('/').get(getAllUsers).post(createUser);
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
 
