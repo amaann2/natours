@@ -1,0 +1,126 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 350px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    position: relative;
+}
+
+.card-picture {
+    position: relative;
+
+    height: 18rem;
+    clip-path: polygon(0 0, 100% 0%, 100% 83%, 0% 98%);
+}
+
+.card-picture-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+    background-image: linear-gradient(to right bottom, var(--DarkShades), #28b487);
+
+    opacity: 0.4;
+
+}
+
+.card-picture-img {
+
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.card-name {
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 1.4rem;
+    right: 2rem;
+}
+
+.card-name span {
+    padding: 10px;
+    line-height: 1;
+    background-image: linear-gradient(to bottom right, rgba(125, 213, 111, 0.85), rgba(40, 180, 135, 0.85));
+    background-image: linear-gradient(to right bottom, var(--DarkShades), #28b487);
+
+}
+
+.card-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 1.4rem;
+    padding: 1rem 2rem;
+    margin-bottom: 20px;
+}
+
+.card_sub-heading {
+    grid-column: 1/-1;
+    color: #3d3b3b;
+    text-transform: uppercase;
+}
+
+.card-text {
+    grid-column: 1/-1;
+    color: grey;
+}
+
+.card-data {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: grey;
+    font-size: 14px;
+
+}
+
+.card-icon {
+  
+    color: #28b487;
+
+    font-size: 1.5rem;
+}
+
+.card-footer {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-top: 1px solid #f1f1f1;
+    font-size: 1.4rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 5rem;
+    grid-row-gap: 1rem;
+    margin-top: auto;
+    color: grey;
+
+}
+
+.card-button {
+    background-color: #55c57a;
+    background-image: linear-gradient(to right bottom, var(--DarkShades), #28b487);
+
+
+    color: white;
+    /* width: 100px; */
+    border-radius: 30px;
+    text-align: center;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.card__ratings {
+    grid-row: 2 / 3;
+}
+
+.card_footer-value {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+}

@@ -1,0 +1,107 @@
+.home {
+    background: radial-gradient(#fff, var(--MainColour));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)), url("./../../assets/378016.jpg");
+    /* opacity: 0.9; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 90vh;
+
+
+}
+
+
+
+
+.home-container {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+section h3 {
+    font-size: 35px;
+    letter-spacing: 2px;
+    font-weight: 200;
+    text-shadow: 2px 2px 4px black;
+}
+
+section h1 {
+    text-transform: uppercase;
+    text-shadow: 2px 1px 5px black;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 20px 0px 10px 0px;
+}
+
+section p {
+    margin: 0px 0px 25px 0px;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px black;
+    word-spacing: 2px;
+}
+
+section a {
+    text-decoration: none;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 3px;
+}
+
+section .btone {
+    color: #000;
+    background-color: var(--LightShades);
+
+}
+
+section .btone:hover {
+    background: #00b894;
+    color: white;
+}
+
+a {
+    /* color: white; */
+}
+
+
+.change_content::after {
+    content: "";
+    animation: changetext 10s infinite linear;
+    color: var(--DarkShades);
+    color: #00b894;
+    color: var(--DarkType);
+
+
+}
+
+@keyframes changetext {
+    0% {
+        content: "India";
+    }
+
+    20% {
+        content: "Turkey";
+    }
+
+    40% {
+        content: "London";
+    }
+
+    60% {
+        content: "Germany";
+    }
+
+    80% {
+        content: "Portugal";
+    }
+
+    100% {
+        content: "Italy";
+    }
+}

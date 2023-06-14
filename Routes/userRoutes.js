@@ -17,6 +17,7 @@ const {
   protect,
   updatePassword,
   restrictTo,
+  logout,
 } = require('./../Controller/authController');
 
 const router = express.Router();
@@ -28,6 +29,7 @@ router.post('/login', login);
 router.post('/forgotPassword', forgortPassword);
 router.patch('/resetPassword/:token', resetPassword);
 
+// router.get('/logout', logout);
 router.use(protect);
 router.patch('/updateMyPassword', updatePassword);
 router.patch('/updateMe', updateMe);

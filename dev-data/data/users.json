@@ -32,7 +32,7 @@
     "email": "ayls@example.com",
     "role": "user",
     "active": true,
-    "photo": "user-4.jpg",
+    "photo": "../../public/img/users/user-4.jpg",
     "password": "$2a$12$tm33.M/4pfEbZF64WbFuHuVFv85v4qEhi.ik8njbud7yaoqCZpjiy"
   },
   {

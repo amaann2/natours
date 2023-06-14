@@ -1,0 +1,76 @@
+:root {
+    --LightShades: #ECEAEC;
+    --LightAccent: #CDA312;
+    --MainColour: #7CB2C3;
+    --DarkAccent: #656B8A;
+    --DarkShades: #2866AD;
+    --DarkType: #28b487;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1300px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin: auto;
+    /* z-index: 100; */
+}
+
+.container-heading {
+    text-align: center;
+    margin: 50px 0 10px 0;
+    text-transform: uppercase;
+    font-size: 26px;
+    letter-spacing: 3px;
+}
+
+
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+}
+
+.col-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+
+.col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: 0.5s;
+}
+
+.col-5 {
+    width: 160px;
+}

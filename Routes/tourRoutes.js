@@ -31,12 +31,20 @@ router
 router
   .route('/')
   .get(getAlltours)
-  .post(authController.protect, authController.restrictTo('admin', 'lead-guide'), createTour);
+  .post(
+    authController.protect,
+    authController.restrictTo('admin', 'lead-guide'),
+    createTour
+  );
 
 router
   .route('/:id')
   .get(getTour)
-  .patch(authController.protect, authController.restrictTo('admin', 'lead-guide'), updateTour)
+  .patch(
+    authController.protect,
+    authController.restrictTo('admin', 'lead-guide'),
+    updateTour
+  )
   .delete(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),

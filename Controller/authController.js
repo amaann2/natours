@@ -33,7 +33,6 @@ const createSendToken = (user, statusCode, res) => {
   user.password = undefined;
   res.status(statusCode).json({
     status: 'Sucess',
-    token,
     data: { user },
   });
 };
@@ -76,6 +75,11 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else {
+    const cookies = req.headers.cookie;
+    token = cookies.split('=')[1];
+    // console.log(cookies);
+    // console.log(token);
   }
   if (!token) {
     return next(
@@ -128,9 +132,7 @@ exports.forgortPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   //TODO: send it to user email
-  const resetUrl = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/users/resetPassword/${resetToken}`;
+  const resetUrl = `${process.env.FRONTEND_HOST}/${user._id}/${resetToken}`;
 
   const message = `Forgot your Password? Submit a patch request with your new password and confirm password to : ${resetUrl}. \n If you didn't forget your password, please ignore this email!`;
 
@@ -202,4 +204,11 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   // TODO: Log user in , send JWT
   createSendToken(user, 200, res);
+});
+
+exports.logout = catchAsync(async (req, res, next) => {
+  res.clearCookie('jwt').status(200).json({
+    status: 'success',
+    message: 'Logout Successfull',
+  });
 });

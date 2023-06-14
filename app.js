@@ -5,15 +5,25 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-
+const cors = require('cors');
 const tourRouter = require('./Routes/tourRoutes');
 const userRouter = require('./Routes/userRoutes');
 const reveiwRouter = require('./Routes/reviewRoutes');
 const appError = require('./utils/appError');
 const globalErrorHandler = require('./Controller/globalErrorController');
-
+const cookieParser = require('cookie-parser');
 const app = express();
 
+//? parsing cookies from incoming requests
+app.use(cookieParser());
+
+//? CORS is a mechanism that allows a server to specify who can access its resources.
+app.use(
+  cors({
+    credentials: true,
+    origin: `${process.env.FRONTEND_HOST}`,
+  })
+);
 //? Set security Htpps headerss
 app.use(helmet());
 
