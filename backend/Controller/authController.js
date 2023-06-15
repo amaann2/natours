@@ -75,12 +75,12 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
-  } else {
-    const cookies = req.headers.cookie;
-    token = cookies.split('=')[1];
-    // console.log(cookies);
-    // console.log(token);
   }
+  const cookies = req.headers.cookie;
+  token = cookies.split('=')[1];
+  // console.log(cookies);
+  console.log(token);
+
   if (!token) {
     return next(
       new appError('You are not logged in! please log  in to access', 401)

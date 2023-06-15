@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
 :root {
     --LightShades: #ECEAEC;
     --LightAccent: #CDA312;
@@ -12,8 +14,6 @@
     margin: 0;
     box-sizing: border-box;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 
 body {
     font-family: 'Ubuntu', sans-serif;
@@ -32,7 +32,10 @@ ul {
     padding-left: 80px;
     padding-right: 80px;
     margin: auto;
-    /* z-index: 100; */
+}
+
+.col-3 img {
+    width: 100%;
 }
 
 .container-heading {
@@ -42,8 +45,6 @@ ul {
     font-size: 26px;
     letter-spacing: 3px;
 }
-
-
 
 .row {
     display: flex;
@@ -73,4 +74,8 @@ ul {
 
 .col-5 {
     width: 160px;
+}
+
+.Toastify__close-button--light {
+    width: 20px;
 }

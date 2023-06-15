@@ -81,7 +81,7 @@
 }
 
 .card-icon {
-  
+
     color: #28b487;
 
     font-size: 1.5rem;
@@ -123,4 +123,13 @@
     flex-direction: row;
     align-items: center;
     font-size: 14px;
+}
+
+@media screen and (max-width:800px) {
+
+    .card-name span {
+        /* padding: 1px; */
+        line-height: 20px;
+
+    }
 }

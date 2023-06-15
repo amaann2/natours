@@ -1,0 +1,36 @@
+.single-tour-header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)), url('./../../assets/378016.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+}
+
+.single-tour-header h3 {
+    font-size: 3.5rem;
+    padding: 2rem;
+    background-image: linear-gradient(to right bottom, var(--DarkShades), #28b487);
+    color: white;
+    font-weight: bolder;
+}
+
+.single-tour-header p {
+    color: white;
+    font-size: 1rem;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+
+@media screen and (max-width : 800px) {
+    .single-tour-header h3 {
+        font-size: 1.7rem;
+        padding: 1rem;
+    }
+
+}

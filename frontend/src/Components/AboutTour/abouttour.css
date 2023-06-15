@@ -1,0 +1,55 @@
+.about-tour {
+    padding: 80px 0;
+}
+
+.left {
+    background-color: var(--LightShades);
+    padding: 20px 60px;
+    /* padding-right: 20px; */
+}
+
+.right {
+    padding-left: 10rem;
+    align-self: self-start;
+}
+
+.about-tour h3 {
+    text-transform: uppercase;
+    margin: 2rem 0;
+    color: var(--DarkType);
+}
+
+.about-tour p {
+    line-height: 40px;
+    color: grey;
+}
+
+
+
+.about-tour ul li {
+    display: flex;
+    align-items: center;
+    line-height: 50px;
+    text-transform: capitalize;
+    color: grey;
+
+}
+
+.about-tour ul li span {
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 1rem;
+    margin-left: 0.4rem;
+    color: #666666;
+}
+
+
+@media screen and (max-width:800px) {
+    .left {
+        padding: 10px 14px;
+    }
+
+    .right {
+        padding: 0;
+    }
+}

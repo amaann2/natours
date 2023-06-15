@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import './Login.css';
-import axios from 'axios';
-import { setCurrentUser } from './../../Redux/User/userAction';
-import { connect } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import "./Login.css";
+import axios from "axios";
+import { setCurrentUser } from "./../../Redux/User/userAction";
+import { connect } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Login = ({ setCurrentUser }) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        'http://localhost:8000/api/v1/users/login',
+        "http://localhost:8000/api/v1/users/login",
         inputValue
       );
       setCurrentUser(res.data);
       toast.success(res.data.status);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -34,10 +34,7 @@ const Login = ({ setCurrentUser }) => {
       [name]: value,
     });
   };
-  const [showPassword, setShowPassword] = useState(false);
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+
   return (
     <div className="form-page">
       <form onSubmit={handleSubmit}>
@@ -49,7 +46,7 @@ const Login = ({ setCurrentUser }) => {
           placeholder="USERNAME"
         />
         <input
-          type={showPassword ? 'text' : 'password'}
+          type="password"
           name="password"
           value={inputValue.password}
           onChange={handleChange}
