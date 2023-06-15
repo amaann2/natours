@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import TourCard from '../../Components/TourCard/TourCard';
-import './AllTour.css';
-import { getTours } from '../../Redux/Tour/toursAction';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { TailSpin } from 'react-loader-spinner';
-import { toast } from 'react-toastify';
+import React, { useEffect } from "react";
+import TourCard from "../../Components/TourCard/TourCard";
+import "./AllTour.css";
+import { getTours } from "../../Redux/Tour/toursAction";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { TailSpin } from "react-loader-spinner";
+import { toast } from "react-toastify";
 const AllTours = () => {
   const dispatch = useDispatch();
   const { tours, loading, error } = useSelector((state) => state.tours);
@@ -13,7 +13,7 @@ const AllTours = () => {
   useEffect(() => {
     if (error) {
       toast.error(error, {
-        position: 'bottom-center',
+        position: "bottom-center",
       });
     }
     dispatch(getTours());
@@ -33,7 +33,10 @@ const AllTours = () => {
             visible={true}
           />
         ) : (
-          tours && tours.map((data) => <TourCard key={data._id} data={data} />)
+          tours &&
+          tours.map((data) => (
+            <TourCard key={data._id} data={data} />
+          ))
         )}
       </div>
     </div>

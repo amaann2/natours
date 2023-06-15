@@ -1,7 +1,8 @@
-import { userActionType } from './userActionType';
+import { userActionType } from "./userActionType";
 
 const INITIAL_STATE = {
   currentUser: null,
+  isAuthenticated: false,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,34 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        isAuthenticated: true,
+      };
+    case userActionType.LOAD_USER_REQUEST:
+      return {
+        isAuthenticated: false,
+      };
+    case userActionType.LOAD_USER_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        currentUser: action.payload,
+      };
+
+    case userActionType.LOAD_USER_FAIL:
+      return {
+        isAuthenticated: false,
+        currentUser: null,
+        error: action.payload,
+      };
+    case userActionType.LOGOUT_SUCCESS:
+      return {
+        isAuthenticated: false,
+        currentUser: null,
+      };
+    case userActionType.LOGOUT_FAIL:
+      return {
+        ...state,
+        error: action.payload,
       };
 
     default:

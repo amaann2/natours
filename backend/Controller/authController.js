@@ -79,7 +79,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   const cookies = req.headers.cookie;
   token = cookies.split('=')[1];
   // console.log(cookies);
-  console.log(token);
+  // console.log(token);
 
   if (!token) {
     return next(
@@ -207,7 +207,12 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 });
 
 exports.logout = catchAsync(async (req, res, next) => {
-  res.clearCookie('jwt').status(200).json({
+  res.cookie('jwt', null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
     status: 'success',
     message: 'Logout Successfull',
   });

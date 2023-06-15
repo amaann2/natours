@@ -4,7 +4,7 @@ const ImageTour = () => {
   return (
     <div style={{ margin: "100px 10px" }}>
       <div className="container ">
-        <div className="row">
+        <div className="row" data-aos='flip-left'>
           <div className="col-3">
             <img src={img1} alt="" />
           </div>

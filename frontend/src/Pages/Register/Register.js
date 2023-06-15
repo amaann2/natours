@@ -43,7 +43,7 @@ const Register = ({ setCurrentUser }) => {
 
   return (
     <div className="form-page">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <input
           type="text"
           name="name"

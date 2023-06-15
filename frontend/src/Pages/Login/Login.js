@@ -36,8 +36,8 @@ const Login = ({ setCurrentUser }) => {
   };
 
   return (
-    <div className="form-page">
-      <form onSubmit={handleSubmit}>
+    <div className="form-page" >
+      <form onSubmit={handleSubmit} >
         <input
           type="email"
           name="email"

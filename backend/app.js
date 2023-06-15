@@ -24,6 +24,8 @@ app.use(
     origin: `${process.env.FRONTEND_HOST}`,
   })
 );
+
+
 //? Set security Htpps headerss
 app.use(helmet());
 
@@ -35,7 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 //? Limit request from same IP
 
 const limiter = rateLimit({
-  max: 100,
+  max: 300,
   windowMs: 60 * 60 * 1000,
   message: ' Too many Requests from this IP, please try again in an hour !',
 });

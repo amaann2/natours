@@ -36,7 +36,7 @@ const ResetPassword = ({ setCurrentUser }) => {
   };
   return (
     <div className="form-page">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <input
           type="password"
           name="password"

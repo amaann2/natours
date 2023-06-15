@@ -1,32 +1,12 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import './Home.css';
-import FeaturedTour from '../../Components/FeaturedTour/FeaturedTour';
-import { Link } from 'react-router-dom';
-import BookNow from '../../Components/BookNow/BookNow';
-import Testimonial from '../../Components/Testimonial/Testimonial';
+import React from "react";
+import { connect } from "react-redux";
+import "./Home.css";
+import FeaturedTour from "../../Components/FeaturedTour/FeaturedTour";
+import { Link } from "react-router-dom";
+import BookNow from "../../Components/BookNow/BookNow";
+import Testimonial from "../../Components/Testimonial/Testimonial";
 
-axios.defaults.withCredentials = true;
-
-const Home = ({ currentUser }) => {
-  const [profile, setProfile] = useState();
-  useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const res = await axios.get(
-          'http://localhost:8000/api/v1/users/getMe',
-          { withCredentials: true }
-        );
-        setProfile(res.data.data.data);
-      } catch (err) {
-        console.log(err.response);
-      }
-    };
-    getProfile();
-  }, []);
-  console.log(profile);
-
+const Home = () => {
   return (
     <>
       <div className="home">

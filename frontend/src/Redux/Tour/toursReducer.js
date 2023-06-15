@@ -46,3 +46,24 @@ export const singleTourReducer = (state = { tour: [] }, action) => {
       return state;
   }
 };
+export const topCheapTour = (state = {topTour: [] }, action) => {
+  switch (action.type) {
+    case tourActionType.TOP_TOUR_REQUEST:
+      return {
+        loading: true,
+        topTour: [],
+      };
+    case tourActionType.TOP_TOUR_SUCCESS:
+      return {
+        loading: false,
+        topTour: action.payload,
+      };
+    case tourActionType.TOP_TOUR_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};

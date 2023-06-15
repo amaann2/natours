@@ -13,7 +13,6 @@ import MapTour from "../../Components/MapTour/MapTour";
 const SingleTour = () => {
   const dispatch = useDispatch();
   const { tour, loading } = useSelector((state) => state.tour);
-  // const { name, duration, startLocation } = tour
   const { id } = useParams();
 
   useEffect(() => {
@@ -36,13 +35,13 @@ const SingleTour = () => {
         /> :
         <>
           <div className="single-tour-header">
-            <h3 className="">{tour && tour.name}</h3>
+            <h3 >{tour && tour.name}</h3>
             <p>{tour && tour.duration} days</p>
           </div>
           <AboutTour tour={tour} />
           <ReviewTour id={tour.id} />
           <ImageTour />
-          <div className="container">
+          <div className="container" data-aos='zoom-out-up'>
 
             <MapTour locations={tour.locations} />
           </div>
