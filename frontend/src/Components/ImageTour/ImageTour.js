@@ -1,19 +1,19 @@
 import React from "react";
-import img1 from "./../../assets/378016.jpg";
-const ImageTour = () => {
+const ImageTour = ({ image }) => {
   return (
     <div style={{ margin: "100px 10px" }}>
       <div className="container ">
-        <div className="row" data-aos='flip-left'>
-          <div className="col-3">
-            <img src={img1} alt="" />
-          </div>
-          <div className="col-3">
-            <img src={img1} alt="" />
-          </div>
-          <div className="col-3">
-            <img src={img1} alt="" />
-          </div>
+        <div className="row" data-aos="flip-left">
+          {image &&
+            image.map((url, index) => (
+              <div className="col-3" key={index}>
+                <img
+                  crossOrigin="anonymous"
+                  src={`http://localhost:8000/img/tours/${url}`}
+                  alt=""
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>

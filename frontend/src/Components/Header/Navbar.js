@@ -9,9 +9,11 @@ const Header = () => {
   const toggleNav = () => {
     setNavIsOpen(!navIsOpen);
   };
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, currentUser } = useSelector((state) => state.user);
+
+
   const dispatch = useDispatch();
-  console.log(isAuthenticated);
+  console.log("user is logged in : ", isAuthenticated);
   const logoutUser = () => {
     dispatch(logout());
   };
@@ -31,10 +33,16 @@ const Header = () => {
         <li className="nav-link">
           <Link to="/about">About</Link>
         </li>
+
         {isAuthenticated ? (
-          <li className="nav-link">
-            <Link onClick={logoutUser}>logout</Link>
-          </li>
+          <>
+            <li className="nav-link">
+              <Link onClick={logoutUser}>logout</Link>
+            </li>
+            <li className="nav-link">
+              <img crossorigin="anonymous" src={`http://localhost:8000/img/users/${currentUser.photo}`} alt="avatar" className="avatar" />
+            </li>
+          </>
         ) : (
           <li className="nav-link">
             <Link to="/login">Login</Link>

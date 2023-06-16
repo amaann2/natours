@@ -25,9 +25,8 @@ app.use(
   })
 );
 
-
 //? Set security Htpps headerss
-app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
 //? Developement Logging
 if (process.env.NODE_ENV === 'development') {

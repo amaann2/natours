@@ -8,6 +8,8 @@ const {
   aliasTopTours,
   getTourStats,
   getMonthlyPlan,
+  uploadTourImages,
+  resizeTourImages,
 } = require('./../Controller/tourController');
 const authController = require('./../Controller/authController');
 const reveiwRouter = require('./reviewRoutes');
@@ -34,6 +36,8 @@ router
   .post(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
+    uploadTourImages,
+    resizeTourImages,
     createTour
   );
 
@@ -43,6 +47,8 @@ router
   .patch(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
+    uploadTourImages,
+    resizeTourImages,
     updateTour
   )
   .delete(

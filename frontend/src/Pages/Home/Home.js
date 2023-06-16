@@ -14,10 +14,10 @@ const Home = () => {
           <section>
             <h3> Welcome to Trexplore</h3>
             <h1>
-              Do come & visit <span class="change_content"></span>
+              Do come & visit <span className="change_content"></span>
             </h1>
             <p>"Embark on Unforgettable Journeys"</p>
-            <Link to="/AllTour" class="btone">
+            <Link to="/AllTour" className="btone">
               Upcoming events
             </Link>
           </section>

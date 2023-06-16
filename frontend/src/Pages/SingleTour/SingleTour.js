@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import './singletour.css'
+import "./singletour.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleTours } from "../../Redux/Tour/toursAction";
 import BookNow from "./../../Components/BookNow/BookNow";
-import AboutTour from '../../Components/AboutTour/AboutTour'
-import ImageTour from '../../Components/ImageTour/ImageTour'
+import AboutTour from "../../Components/AboutTour/AboutTour";
+import ImageTour from "../../Components/ImageTour/ImageTour";
 import ReviewTour from "../../Components/ReviewTour/ReviewTour";
-import { TailSpin } from 'react-loader-spinner';
+import { TailSpin } from "react-loader-spinner";
 import MapTour from "../../Components/MapTour/MapTour";
 
 const SingleTour = () => {
@@ -19,10 +19,9 @@ const SingleTour = () => {
     dispatch(getSingleTours(id));
   }, [dispatch, id]);
 
-  console.log(tour.locations)
   return (
     <>
-      {loading ?
+      {loading ? (
         <TailSpin
           height="80"
           width="80"
@@ -32,23 +31,28 @@ const SingleTour = () => {
           wrapperStyle={{}}
           wrapperClass=""
           visible={true}
-        /> :
+        />
+      ) : (
         <>
-          <div className="single-tour-header">
-            <h3 >{tour && tour.name}</h3>
+          <div
+            className="single-tour-header"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:8000/img/tours/${tour.imageCover})`,
+            }}
+          >
+            {/* <img src={`http://localhost:8000/img/tours/${tour.imageCover}`}  alt="fa" crossOrigin="anonymous"/> */}
+            <h3>{tour && tour.name}</h3>
             <p>{tour && tour.duration} days</p>
           </div>
           <AboutTour tour={tour} />
           <ReviewTour id={tour.id} />
-          <ImageTour />
-          <div className="container" data-aos='zoom-out-up'>
-
+          <ImageTour image={tour.images} />
+          <div className="container" data-aos="zoom-out-up">
             <MapTour locations={tour.locations} />
           </div>
           <BookNow />
         </>
-
-      }
+      )}
     </>
   );
 };

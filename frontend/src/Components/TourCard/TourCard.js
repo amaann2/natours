@@ -1,6 +1,5 @@
 import React from "react";
 import "./TourCard.css";
-import card from "./../../assets/378016.jpg";
 import {
   MdLocationOn,
   MdOutlineCalendarToday,
@@ -41,11 +40,16 @@ const TourCard = ({ data }) => {
   const monthIndex = date.getMonth() + 1;
   const month = monthNames[monthIndex];
   return (
-    <div className="card" >
+    <div className="card">
       <div className="card-header">
         <div className="card-picture">
           <div className="card-picture-overlay"></div>
-          <img className="card-picture-img" src={card} alt="" />
+          <img
+            className="card-picture-img"
+            crossOrigin="anonymous"
+            src={`http://localhost:8000/img/tours/${data.imageCover}`}
+            alt={data.imageCover}
+          />
         </div>
         <h3 className="card-name">
           <span>{name}</span>

@@ -1,5 +1,4 @@
 const express = require('express');
-const multer = require('multer');
 const {
   getAllUsers,
   createUser,
@@ -9,6 +8,8 @@ const {
   updateMe,
   deleteMe,
   getMe,
+  uploadUserPhoto,
+  resizeUserPhoto,
 } = require('./../Controller/userController');
 const {
   signup,
@@ -21,7 +22,6 @@ const {
   logout,
 } = require('./../Controller/authController');
 
-const upload = multer({ dest: 'public/img/users' });
 const router = express.Router();
 
 //? authentication
@@ -36,7 +36,7 @@ router.get('/logout', logout);
 
 router.use(protect);
 router.patch('/updateMyPassword', updatePassword);
-router.patch('/updateMe', updateMe);
+router.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
 router.delete('/deleteMe', deleteMe);
 router.get('/getMe', getMe, getUser);
 

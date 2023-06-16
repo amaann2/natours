@@ -67,6 +67,13 @@ li.nav-link a {
     text-transform: uppercase;
 }
 
+.avatar {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+}
+
 @media screen and (max-width: 800px) {
     nav .bars {
         display: block;
