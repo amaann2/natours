@@ -21,6 +21,8 @@ import AdminRoute from "./Utils/AdminRoute";
 import UserRoute from "./Utils/UserRoute";
 import Layout from "./Utils/Layout";
 import ProtectedRoute from "./Utils/ProtectedRoute";
+import UserProfile from "./Pages/UserProfile/UserProfile";
+
 
 axios.defaults.withCredentials = true;
 
@@ -29,12 +31,13 @@ function App() {
     store.dispatch(loadUser());
 
   }, []);
+  console.log(process.env.REACT_APP_URL_LOCAL)
   return (
     <>
       <Navbar />
       <Routes>
 
-        {/* User route */}
+        {/*public */}
 
         <Route path="/" element={<Layout />}>
 
@@ -42,22 +45,18 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/alltour" element={<AllTours />} />
           <Route path="/tour/:id" element={<SingleTour />} />
-
-
-
-          {/* Public routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/:id/:token" element={<ResetPassword />} />
-
+          <Route path="/user" element={<UserProfile />} />
 
           {/* admin route */}
-          {/* <Route path="/admin" element={
-            <ProtectedRoute roles={['user']}>
+          <Route path="/admin" element={
+            <ProtectedRoute >
               <Dashboard />
             </ProtectedRoute>
-          } /> */}
+          } />
 
 
 

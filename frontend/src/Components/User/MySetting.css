@@ -1,0 +1,16 @@
+.setting h3 {
+    color: var(--DarkType);
+    font-size: 1.5rem;
+    margin: 1rem 0 0 0 ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.user-profile {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    background-size: cover;
+    align-self: center;
+}

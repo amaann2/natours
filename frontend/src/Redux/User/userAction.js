@@ -1,5 +1,6 @@
 import { userActionType } from "./userActionType";
-import axios from "axios";
+import axios from "./../../Utils/axiosConfig";
+
 axios.defaults.withCredentials = true;
 
 //? login and register
@@ -14,12 +15,9 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: userActionType.LOAD_USER_REQUEST,
     });
-    const { data } = await axios.get(
-      "http://localhost:8000/api/v1/users/getMe",
-      {
-        withCredentials: true,
-      }
-    );
+    const { data } = await axios.get("/api/v1/users/getMe", {
+      withCredentials: true,
+    });
 
     dispatch({
       type: userActionType.LOAD_USER_SUCCESS,
@@ -38,7 +36,7 @@ export const loadUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      "http://localhost:8000/api/v1/users/logout",
+      "/api/v1/users/logout",
       {
         withCredentials: true,
       }

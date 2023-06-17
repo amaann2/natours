@@ -39,12 +39,14 @@ const Header = () => {
               <Link onClick={logoutUser}>logout</Link>
             </li>
             <li className="nav-link">
-              <img
-                crossorigin="anonymous"
-                src={`http://localhost:8000/img/users/${currentUser.photo}`}
-                alt="avatar"
-                className="avatar"
-              />
+              <Link to={"/user"}>
+                <img
+                  crossorigin="anonymous"
+                  src={`http://localhost:8000/img/users/${currentUser.photo}`}
+                  alt="avatar"
+                  className="avatar"
+                />
+              </Link>
             </li>
           </>
         ) : (

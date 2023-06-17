@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
-import axios from "axios";
+import axios from "./../../Utils/axiosConfig";
+
 import { setCurrentUser } from "./../../Redux/User/userAction";
 import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,10 +15,7 @@ const Login = ({ setCurrentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/users/login",
-        inputValue
-      );
+      const res = await axios.post("/api/v1/users/login", inputValue);
       setCurrentUser(res.data);
       toast.success(res.data.status);
       navigate("/");
@@ -36,8 +34,8 @@ const Login = ({ setCurrentUser }) => {
   };
 
   return (
-    <div className="form-page" >
-      <form onSubmit={handleSubmit} >
+    <div className="form-page">
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"

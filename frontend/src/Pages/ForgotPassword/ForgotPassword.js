@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from "./../../Utils/axiosConfig";
+
 import { toast } from 'react-toastify';
 
 const ForgotPassword = () => {
@@ -10,7 +11,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        'http://localhost:8000/api/v1/users/forgotPassword',
+        '/api/v1/users/forgotPassword',
         inputValue
       );
       toast.success(res.data.status);

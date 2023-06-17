@@ -13,8 +13,10 @@
 form {
     padding: 4rem;
 
-    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1); */
     background-color: white;
+    display: flex;
+    flex-direction: column;
 
 
 }

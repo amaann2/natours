@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { setCurrentUser } from './../../Redux/User/userAction';
-import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "./../../Utils/axiosConfig";
+
+import { setCurrentUser } from "./../../Redux/User/userAction";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ResetPassword = ({ setCurrentUser }) => {
   const { token } = useParams();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
-    password: '',
-    confirmPassword: '',
+    password: "",
+    confirmPassword: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.patch(
-        `http://localhost:8000/api/v1/users/resetPassword/${token}`,
+        `/api/v1/users/resetPassword/${token}`,
         inputValue
       );
       setCurrentUser(res.data.data.user);
       toast.success(res.data.status);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -36,7 +37,7 @@ const ResetPassword = ({ setCurrentUser }) => {
   };
   return (
     <div className="form-page">
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <input
           type="password"
           name="password"
