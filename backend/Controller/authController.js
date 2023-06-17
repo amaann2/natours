@@ -191,7 +191,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 //* this function only perform after user logged in
+
 exports.updatePassword = catchAsync(async (req, res, next) => {
+  
   //TODO: Get user from collection
   const user = await User.findById(req.user.id).select('+password');
 

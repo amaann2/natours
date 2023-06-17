@@ -11,7 +11,6 @@ const Header = () => {
   };
   const { isAuthenticated, currentUser } = useSelector((state) => state.user);
 
-
   const dispatch = useDispatch();
   console.log("user is logged in : ", isAuthenticated);
   const logoutUser = () => {
@@ -40,7 +39,12 @@ const Header = () => {
               <Link onClick={logoutUser}>logout</Link>
             </li>
             <li className="nav-link">
-              <img crossorigin="anonymous" src={`http://localhost:8000/img/users/${currentUser.photo}`} alt="avatar" className="avatar" />
+              <img
+                crossorigin="anonymous"
+                src={`http://localhost:8000/img/users/${currentUser.photo}`}
+                alt="avatar"
+                className="avatar"
+              />
             </li>
           </>
         ) : (

@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./reviewtour.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
-import { Pagination } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 import axios from "axios";
-import user from "./../../assets/user-2.png";
 import Stars from "../Stars/Stars";
-
 import "swiper/css";
+
 const ReviewTour = ({ id }) => {
   const [review, setReview] = useState([]);
   useEffect(() => {
@@ -37,14 +36,21 @@ const ReviewTour = ({ id }) => {
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 4000,
+        }}
+        modules={[Autoplay, Pagination]}
         className="mySwiper"
       >
         {review &&
           review.map((data, index) => (
             <SwiperSlide>
               <div className="review-box" key={index}>
-                <img src={user} alt="profileimage" />
+                <img
+                  crossOrigin="anonymous"
+                  src={`http://localhost:8000/img/users/${data.user.photo}`}
+                  alt="profileimage"
+                />
                 <h3>{data.user && data.user.name}</h3>
                 <p>{data.review}</p>
                 <Stars rating={data.rating} />
