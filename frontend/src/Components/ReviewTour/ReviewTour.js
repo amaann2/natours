@@ -3,7 +3,7 @@ import "./reviewtour.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper";
-import axios from "axios";
+import axios from "./../../Utils/axiosConfig";
 import Stars from "../Stars/Stars";
 import "swiper/css";
 
@@ -12,9 +12,7 @@ const ReviewTour = ({ id }) => {
   useEffect(() => {
     const getReview = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8000/api/v1/tours/${id}/reviews`
-        );
+        const res = await axios.get(`/api/v1/tours/${id}/reviews`);
         setReview(res.data.data.data);
       } catch (error) {
         console.log(error.response);
@@ -48,7 +46,7 @@ const ReviewTour = ({ id }) => {
               <div className="review-box" key={index}>
                 <img
                   crossOrigin="anonymous"
-                  src={`http://localhost:8000/img/users/${data.user.photo}`}
+                  src={`${process.env.REACT_APP_URL_DEPLOY}/img/users/${data.user.photo}`}
                   alt="profileimage"
                 />
                 <h3>{data.user && data.user.name}</h3>

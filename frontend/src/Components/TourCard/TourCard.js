@@ -20,7 +20,6 @@ const TourCard = ({ data }) => {
     duration,
     difficulty,
     startDates,
-    slug,
   } = data;
   const date = new Date(startDates[0]);
   const monthNames = [
@@ -48,7 +47,7 @@ const TourCard = ({ data }) => {
           <img
             className="card-picture-img"
             crossOrigin="anonymous"
-            src={`http://localhost:8000/img/tours/${data.imageCover}`}
+            src={`${process.env.REACT_APP_URL_DEPLOY}/img/tours/${data.imageCover}`}
             alt={data.imageCover}
           />
         </div>

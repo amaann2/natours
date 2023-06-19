@@ -18,7 +18,7 @@ import { loadUser } from "./Redux/User/userAction";
 import axios from "axios";
 import Dashboard from "./Admin/Dashboard";
 // import Layout from "./Utils/Layout";
-import ProtectedRoute from "./Utils/ProtectedRoute";
+// import ProtectedRoute from "./Utils/ProtectedRoute";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import CheckoutSucess from "./Components/CheckoutSuccess/CheckoutSucess";
 import AdminRoute from "./Utils/AdminRoute";
