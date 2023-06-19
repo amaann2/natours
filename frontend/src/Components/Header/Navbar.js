@@ -42,7 +42,7 @@ const Header = () => {
               <Link to={"/user"}>
                 <img
                   crossorigin="anonymous"
-                  src={`http://localhost:8000/img/users/${currentUser.photo}`}
+                  src={`${process.env.REACT_APP_URL_DEPLOY}/img/users/${currentUser.photo}`}
                   alt="avatar"
                   className="avatar"
                 />
