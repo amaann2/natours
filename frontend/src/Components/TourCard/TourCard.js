@@ -20,6 +20,7 @@ const TourCard = ({ data }) => {
     duration,
     difficulty,
     startDates,
+    slug,
   } = data;
   const date = new Date(startDates[0]);
   const monthNames = [

@@ -16,55 +16,51 @@ import { useEffect } from "react";
 import store from "./Redux/store";
 import { loadUser } from "./Redux/User/userAction";
 import axios from "axios";
-import Dashboard from './Admin/Dashboard'
-import AdminRoute from "./Utils/AdminRoute";
-import UserRoute from "./Utils/UserRoute";
-import Layout from "./Utils/Layout";
+import Dashboard from "./Admin/Dashboard";
+// import Layout from "./Utils/Layout";
 import ProtectedRoute from "./Utils/ProtectedRoute";
 import UserProfile from "./Pages/UserProfile/UserProfile";
-
+import CheckoutSucess from "./Components/CheckoutSuccess/CheckoutSucess";
+import AdminRoute from "./Utils/AdminRoute";
 
 axios.defaults.withCredentials = true;
 
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
-
   }, []);
-  console.log(process.env.REACT_APP_URL_LOCAL)
+
   return (
     <>
       <Navbar />
-      <Routes>
 
+      <Routes>
         {/*public */}
 
-        <Route path="/" element={<Layout />}>
-
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/alltour" element={<AllTours />} />
-          <Route path="/tour/:id" element={<SingleTour />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/:id/:token" element={<ResetPassword />} />
-          <Route path="/user" element={<UserProfile />} />
-
-          {/* admin route */}
-          <Route path="/admin" element={
-            <ProtectedRoute >
+        {/* <Route path="/" element={<Layout />}> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/alltour" element={<AllTours />} />
+        <Route path="/tour/:id" element={<SingleTour />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/:id/:token" element={<ResetPassword />} />
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/success" element={<CheckoutSucess />} />
+        {/* admin route */}
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
               <Dashboard />
-            </ProtectedRoute>
-          } />
+            </AdminRoute>
+          }
+        />
 
-
-
-          {/* unhandled Route */}
-          <Route path="*" element={<div>page notfound </div>} />
-
-        </Route>
-
+        {/* unhandled Route */}
+        <Route path="*" element={<div>page notfound </div>} />
+        {/* </Route> */}
       </Routes>
       <Footer />
       <ToastContainer />

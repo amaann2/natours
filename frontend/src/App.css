@@ -80,3 +80,10 @@ ul {
 .Toastify__close-button--light {
     width: 20px;
 }
+
+@media screen and (max-width:800px) {
+    .container{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}

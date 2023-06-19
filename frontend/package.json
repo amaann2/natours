@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -24,6 +26,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2",
     "slick-carousel": "^1.8.1",
+    "stripe": "^12.9.0",
     "swiper": "^9.4.1",
     "web-vitals": "^2.1.4"
   },

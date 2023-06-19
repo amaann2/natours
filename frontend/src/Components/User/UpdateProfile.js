@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const UpdateProfile = ({ currentUser }) => {
-  const [profile, setProfile] = useState(currentUser?.photo);
+  const [profile,] = useState(currentUser?.photo);
 
   return (
     <form action="">
@@ -13,7 +13,7 @@ const UpdateProfile = ({ currentUser }) => {
       />
       <input type="text" placeholder={currentUser?.name} />
       <input type="email" placeholder={currentUser?.email} />
-      <input type="file" name="" id="" />
+      <input type="file" name="" id="" placeholder="Upload photo"/>
       <button>save settings</button>
     </form>
   );

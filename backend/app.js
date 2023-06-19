@@ -9,6 +9,7 @@ const cors = require('cors');
 const tourRouter = require('./Routes/tourRoutes');
 const userRouter = require('./Routes/userRoutes');
 const reveiwRouter = require('./Routes/reviewRoutes');
+const bookingRouter = require('./Routes/bookingRoutes');
 const appError = require('./utils/appError');
 const globalErrorHandler = require('./Controller/globalErrorController');
 const cookieParser = require('cookie-parser');
@@ -76,6 +77,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reveiwRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 //? unhandled route
 

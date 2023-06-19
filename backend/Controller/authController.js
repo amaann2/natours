@@ -31,6 +31,7 @@ const createSendToken = (user, statusCode, res) => {
   res.cookie('jwt', token, cookieOptions);
 
   user.password = undefined;
+  // user.passwordChangedAt = undefined;
   res.status(statusCode).json({
     status: 'Sucess',
     data: { user },
@@ -43,7 +44,6 @@ exports.signup = catchAsync(async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     confirmPassword: req.body.confirmPassword,
-    passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role,
   });
   createSendToken(newUser, 201, res);
@@ -70,17 +70,29 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
   // TODO:  Getting token and check of it's there
   let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1];
-  }
+  // if (
+  //   req.headers.authorization &&
+  //   req.headers.authorization.startsWith('Bearer')
+  // ) {
+  //   token = req.headers.authorization.split(' ')[1];
+  // }
+  console.log(req.headers.cookie);
+
+  // if (req.headers.cookie) {
+  //   const cookies = req.headers.cookie;
+  //   token = cookies.split('=')[3];
+  // }
   if (req.headers.cookie) {
-    const cookies = req.headers.cookie;
-    token = cookies.split('=')[1];
+    const cookies = req.headers.cookie.split(';');
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split('=');
+      if (name === 'jwt') {
+        token = value;
+        break;
+      }
+    }
   }
-  // console.log(cookies);
+
   // console.log(token);
 
   if (!token) {
@@ -193,7 +205,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 //* this function only perform after user logged in
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  
   //TODO: Get user from collection
   const user = await User.findById(req.user.id).select('+password');
 
