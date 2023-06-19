@@ -19,10 +19,11 @@ connectionToDatabase();
 
 //*  start the server
 
-
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
-  console.log(`App is Running on port ${port} 👌`);
+  console.log(
+    `App is Running on port ${port} in ${process.env.NODE_ENV} mode 👌`
+  );
 });
 
 //* Handled UnhandledRejection
