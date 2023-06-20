@@ -13,6 +13,7 @@ const bookingRouter = require('./Routes/bookingRoutes');
 const appError = require('./utils/appError');
 const globalErrorHandler = require('./Controller/globalErrorController');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 const app = express();
 
 //? parsing cookies from incoming requests
@@ -74,7 +75,8 @@ app.use(
 //? Serving the static file
 
 app.use(express.static(`${__dirname}/public`));
-app.use(express.static(`build`));
+// app.use(express.static(`build`));
+app.use(express.static(path.join(__dirname, 'build')));
 
 //? routing
 
@@ -85,8 +87,11 @@ app.use('/api/v1/bookings', bookingRouter);
 
 //? unhandled route
 
-app.all('/api/*', (req, res, next) => {
-  next(new appError(`can't find ${req.originalUrl} on this server`, 404));
+// app.all('*', (req, res, next) => {
+//   next(new appError(`can't find ${req.originalUrl} on this server`, 404));
+// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 //? Globar error
