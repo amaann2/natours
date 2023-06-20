@@ -85,7 +85,7 @@ app.use('/api/v1/bookings', bookingRouter);
 
 //? unhandled route
 
-app.all('*', (req, res, next) => {
+app.all('/api/*', (req, res, next) => {
   next(new appError(`can't find ${req.originalUrl} on this server`, 404));
 });
 
