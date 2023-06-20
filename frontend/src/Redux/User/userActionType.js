@@ -1,5 +1,5 @@
 export const userActionType = {
-  //? login and register 
+  //? login and register
   set_CURRENT_USER: "SET_CURRENT_USER",
 
   //? get me endpoint

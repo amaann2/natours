@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { setCurrentUser } from './../../Redux/User/userAction';
-import { connect } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import axios from "axios";
+import { setCurrentUser } from "./../../Redux/User/userAction";
+import { connect } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { TailSpin } from "react-loader-spinner";
+
 const Register = ({ setCurrentUser }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        'http://localhost:8000/api/v1/users/signup',
-        inputValue
-      );
+      setLoading(true);
+      const res = await axios.post(`/api/v1/users/signup`, inputValue);
       setCurrentUser(res.data.data);
       toast.success(res.data.status);
+      setLoading(false);
       setInputValue({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
       });
-      navigate('/');
+      navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -43,41 +45,54 @@ const Register = ({ setCurrentUser }) => {
 
   return (
     <div className="form-page">
-      <form onSubmit={handleSubmit} >
-        <input
-          type="text"
-          name="name"
-          value={inputValue.name}
-          onChange={handleChange}
-          placeholder="NAME"
+      {loading ? (
+        <TailSpin
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
         />
-        <input
-          type="email"
-          name="email"
-          value={inputValue.email}
-          onChange={handleChange}
-          placeholder="USERNAME"
-        />
-        <input
-          type="password"
-          name="password"
-          value={inputValue.password}
-          onChange={handleChange}
-          placeholder="PASSWORD"
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          value={inputValue.confirmPassword}
-          onChange={handleChange}
-          placeholder="CONFIRM PASSWORD"
-        />
- 
-        <button>create an account</button>
-        <p>
-          Already have an account ? <Link to="/login">Login</Link>
-        </p>
-      </form>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            value={inputValue.name}
+            onChange={handleChange}
+            placeholder="NAME"
+          />
+          <input
+            type="email"
+            name="email"
+            value={inputValue.email}
+            onChange={handleChange}
+            placeholder="USERNAME"
+          />
+          <input
+            type="password"
+            name="password"
+            value={inputValue.password}
+            onChange={handleChange}
+            placeholder="PASSWORD"
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            value={inputValue.confirmPassword}
+            onChange={handleChange}
+            placeholder="CONFIRM PASSWORD"
+          />
+
+          <button>create an account</button>
+          <p>
+            Already have an account ? <Link to="/login">Login</Link>
+          </p>
+        </form>
+      )}
     </div>
   );
 };

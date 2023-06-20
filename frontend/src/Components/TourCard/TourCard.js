@@ -1,5 +1,6 @@
 import React from "react";
 import "./TourCard.css";
+
 import {
   MdLocationOn,
   MdOutlineCalendarToday,
@@ -46,8 +47,7 @@ const TourCard = ({ data }) => {
           <div className="card-picture-overlay"></div>
           <img
             className="card-picture-img"
-            crossOrigin="anonymous"
-            src={`${process.env.REACT_APP_URL_DEPLOY}/img/tours/${data.imageCover}`}
+            src={`/img/tours/${data.imageCover}`}
             alt={data.imageCover}
           />
         </div>

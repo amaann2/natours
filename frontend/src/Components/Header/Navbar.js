@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Redux/User/userAction";
+
 const Header = () => {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const toggleNav = () => {
@@ -12,7 +13,6 @@ const Header = () => {
   const { isAuthenticated, currentUser } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-  console.log("user is logged in : ", isAuthenticated);
   const logoutUser = () => {
     dispatch(logout());
   };
@@ -41,8 +41,7 @@ const Header = () => {
             <li className="nav-link">
               <Link to={"/user"}>
                 <img
-                  crossorigin="anonymous"
-                  src={`${process.env.REACT_APP_URL_DEPLOY}/img/users/${currentUser.photo}`}
+                  src={`/img/users/${currentUser.photo}`}
                   alt="avatar"
                   className="avatar"
                 />

@@ -1,5 +1,6 @@
 import { tourActionType } from "./toursActionType";
-import axios from "./../../Utils/axiosConfig";
+import axios from "axios";
+
 export const getTours = () => async (dispatch) => {
   try {
     dispatch({
@@ -36,7 +37,7 @@ export const getSingleTours = (id) => async (dispatch) => {
     });
   }
 };
-export const getTopThreeCheapTour = (id) => async (dispatch) => {
+export const getTopThreeCheapTour = () => async (dispatch) => {
   try {
     dispatch({
       type: tourActionType.TOP_TOUR_REQUEST,

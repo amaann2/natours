@@ -37,7 +37,7 @@ const SingleTour = () => {
           <div
             className="single-tour-header"
             style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${process.env.REACT_APP_URL_DEPLOY}/img/tours/${tour.imageCover})`,
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/img/tours/${tour.imageCover})`,
             }}
           >
             <h3>{tour && tour.name}</h3>

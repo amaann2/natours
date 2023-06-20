@@ -55,14 +55,14 @@ const AboutTour = ({ tour }) => {
             <h3>your tour guide</h3>
             <ul>
               {guides &&
-                guides.map((guide) => (
-                  <li>
+                guides.map((guide, i) => (
+                  <li key={i}>
                     <span>{guide.role}</span> {guide.name}
                   </li>
                 ))}
             </ul>
           </div>
-          <div className="col-2 right" >
+          <div className="col-2 right">
             <h3>About the {name}</h3>
             <p>{description}</p>
           </div>

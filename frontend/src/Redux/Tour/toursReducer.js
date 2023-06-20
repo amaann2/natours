@@ -31,6 +31,7 @@ export const singleTourReducer = (state = { tour: [] }, action) => {
       return {
         loading: true,
         tour: [],
+        
       };
     case tourActionType.TOUR_SUCCESS:
       return {

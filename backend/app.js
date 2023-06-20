@@ -19,14 +19,16 @@ const app = express();
 app.use(cookieParser());
 
 //? CORS is a mechanism that allows a server to specify who can access its resources.
+
 app.use(
   cors({
+    // origin: `http://localhost:3000`,
+    // methods: ['GET', 'POST', 'DELETE', 'PATCH', 'PUT'],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    origin: `${process.env.FRONTEND_HOST}`,
   })
 );
 
+app.options('*', cors());
 //? Set security Htpps headerss
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
@@ -72,6 +74,7 @@ app.use(
 //? Serving the static file
 
 app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`build`));
 
 //? routing
 

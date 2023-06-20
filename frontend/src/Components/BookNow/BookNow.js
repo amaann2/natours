@@ -1,11 +1,10 @@
 import React from "react";
 import "./booknow.css";
-import axios from "./../../Utils/axiosConfig";
+import axios from "axios";
 // import Stripe from "stripe";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Link } from "react-router-dom";
-
 const stripe = await loadStripe(
   "pk_test_51MeJt3SJ6p54l9omPgb5AncZiaSDLWeAo2fHshhtiQQtFEsMnrwtBaclaywkiNnJeRzSJaHlIWahDqkqz2q6Y9YN00C9HVhIbt"
 );
@@ -15,7 +14,6 @@ axios.defaults.withCredentials = true;
 const BookNow = () => {
   const { tour } = useSelector((state) => state.tour);
   const { isAuthenticated } = useSelector((state) => state.user);
-  console.log(isAuthenticated);
 
   const bookTour = async () => {
     try {
@@ -50,7 +48,7 @@ const BookNow = () => {
           <div className="col-2">
             {isAuthenticated ? (
               <button className="btn-book-now" onClick={bookTour}>
-                Book Now
+                Book now
               </button>
             ) : (
               <button className="btn-book-now">

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./Login.css";
-import axios from "./../../Utils/axiosConfig";
 import { setCurrentUser } from "./../../Redux/User/userAction";
 import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { TailSpin } from "react-loader-spinner";
 
 const Login = ({ setCurrentUser }) => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
@@ -15,15 +17,16 @@ const Login = ({ setCurrentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/users/login", inputValue);
+      setLoading(true);
+      const res = await axios.post(`/api/v1/users/login`, inputValue);
       setCurrentUser(res.data);
+      setLoading(false);
       toast.success(res.data.status);
       navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -35,30 +38,43 @@ const Login = ({ setCurrentUser }) => {
 
   return (
     <div className="form-page">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          value={inputValue.email}
-          onChange={handleChange}
-          placeholder="USERNAME"
+      {loading ? (
+        <TailSpin
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
         />
-        <input
-          type="password"
-          name="password"
-          value={inputValue.password}
-          onChange={handleChange}
-          placeholder="PASSWORD"
-        />
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            value={inputValue.email}
+            onChange={handleChange}
+            placeholder="USERNAME"
+          />
+          <input
+            type="password"
+            name="password"
+            value={inputValue.password}
+            onChange={handleChange}
+            placeholder="PASSWORD"
+          />
 
-        <button>LOGIN</button>
-        <p>
-          Forgot Password ? <Link to="/forgotPassword">reset password</Link>
-        </p>
-        <p>
-          Don't have an account ? <Link to="/signup">Sign up</Link>
-        </p>
-      </form>
+          <button>LOGIN</button>
+          <p>
+            Forgot Password ? <Link to="/forgotPassword">reset password</Link>
+          </p>
+          <p>
+            Don't have an account ? <Link to="/signup">Sign up</Link>
+          </p>
+        </form>
+      )}
     </div>
   );
 };

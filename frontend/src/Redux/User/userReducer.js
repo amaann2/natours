@@ -14,7 +14,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         currentUser: action.payload,
         isAuthenticated: true,
         role: action.payload.role,
-        error:null
+        error: null,
       };
     case userActionType.LOAD_USER_REQUEST:
       return {

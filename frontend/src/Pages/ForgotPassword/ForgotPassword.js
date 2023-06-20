@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import axios from "./../../Utils/axiosConfig";
-
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { TailSpin } from "react-loader-spinner";
 
 const ForgotPassword = () => {
   const [inputValue, setInputValue] = useState({
-    email: '',
+    email: "",
   });
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        '/api/v1/users/forgotPassword',
-        inputValue
-      );
+      setLoading(true);
+      const res = await axios.post(`/api/v1/users/forgotPassword`, inputValue);
       toast.success(res.data.status);
+      setLoading(false);
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -29,16 +29,29 @@ const ForgotPassword = () => {
   };
   return (
     <div className="form-page">
-      <form onSubmit={handleSubmit} >
-        <input
-          type="email"
-          name="email"
-          value={inputValue.email}
-          onChange={handleChange}
-          placeholder="EMAIL"
+      {loading ? (
+        <TailSpin
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
         />
-        <button>Reset Password</button>
-      </form>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            value={inputValue.email}
+            onChange={handleChange}
+            placeholder="EMAIL"
+          />
+          <button>Reset Password</button>
+        </form>
+      )}
     </div>
   );
 };

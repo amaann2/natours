@@ -1,3 +1,4 @@
+const Review = require('../Model/reviewModel');
 const User = require('../Model/userModel');
 const appError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
@@ -46,8 +47,6 @@ const filterObj = (obj, ...allowedField) => {
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-
-
   // TODO : create error if the user POSts password data
   if (req.body.password || req.body.confirmPassword) {
     return next(
@@ -104,6 +103,8 @@ exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
 exports.updateUser = factory.updateOne(User); //! do not update password with this
 exports.deleteUser = factory.deleteOne(User);
+
+
 
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {

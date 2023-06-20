@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 
 const UpdateProfile = ({ currentUser }) => {
-  const [profile,] = useState(currentUser?.photo);
+  const [profile] = useState(currentUser?.photo);
 
   return (
     <form action="">
       <img
         crossOrigin="anonymous"
-        src={`http://localhost:8000/img/users/${profile}`}
-        alt=""
+        src={`/img/users/${profile}`}
+        alt="profile"
         className="user-profile"
       />
       <input type="text" placeholder={currentUser?.name} />
       <input type="email" placeholder={currentUser?.email} />
-      <input type="file" name="" id="" placeholder="Upload photo"/>
+      <input type="file" name="" id="" placeholder="Upload photo" />
       <button>save settings</button>
     </form>
   );

@@ -9,7 +9,7 @@ const ImageTour = ({ image }) => {
               <div className="col-3" key={index}>
                 <img
                   crossOrigin="anonymous"
-                  src={`http://localhost:8000/img/tours/${url}`}
+                  src={`/img/tours/${url}`}
                   alt=""
                 />
               </div>

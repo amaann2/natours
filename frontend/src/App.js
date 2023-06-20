@@ -38,7 +38,7 @@ function App() {
         {/*public */}
 
         {/* <Route path="/" element={<Layout />}> */}
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/alltour" element={<AllTours />} />
         <Route path="/tour/:id" element={<SingleTour />} />
@@ -46,8 +46,9 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/:id/:token" element={<ResetPassword />} />
-        <Route path="/user" element={<UserProfile />} />
         <Route path="/success" element={<CheckoutSucess />} />
+        <Route path="/user" element={<UserProfile />} />
+
         {/* admin route */}
         <Route
           path="/admin"

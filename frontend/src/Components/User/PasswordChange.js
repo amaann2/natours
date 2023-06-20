@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { setCurrentUser } from "../../Redux/User/userAction";
 import { connect } from "react-redux";
-import axios from "./../../Utils/axiosConfig";
+// import axios from "./../../Utils/axiosConfig";
+import axios from "axios";
 
 axios.defaults.withCredentials = true;
 const PasswordChange = ({ setCurrentUser }) => {

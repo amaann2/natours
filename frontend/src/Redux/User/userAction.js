@@ -1,5 +1,5 @@
 import { userActionType } from "./userActionType";
-import axios from "./../../Utils/axiosConfig";
+import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
@@ -15,7 +15,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: userActionType.LOAD_USER_REQUEST,
     });
-    const { data } = await axios.get("/api/v1/users/getMe", {
+    const { data } = await axios.get(`/api/v1/users/getMe`, {
       withCredentials: true,
     });
 
@@ -35,12 +35,9 @@ export const loadUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      "/api/v1/users/logout",
-      {
-        withCredentials: true,
-      }
-    );
+    const { data } = await axios.get(`/api/v1/users/logout`, {
+      withCredentials: true,
+    });
     dispatch({
       type: userActionType.LOGOUT_SUCCESS,
       payload: data,
@@ -51,3 +48,25 @@ export const logout = () => async (dispatch) => {
     });
   }
 };
+
+// export const loginUser = (inputValue) => async (dispatch) => {
+//   console.log(inputValue);
+
+//   try {
+//     dispatch({
+//       type: userActionType.LOGIN_USER_REQUEST,
+//     });
+
+//     const res = await axios.get("/api/v1/users/login", inputValue);
+//     console.log(res.data);
+//     dispatch({
+//       type: userActionType.LOGIN_USER_SUCCESS,
+//       payload: res.data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: userActionType.LOGIN_USER_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
