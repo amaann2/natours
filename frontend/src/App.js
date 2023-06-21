@@ -17,11 +17,11 @@ import store from "./Redux/store";
 import { loadUser } from "./Redux/User/userAction";
 import axios from "axios";
 import Dashboard from "./Admin/Dashboard";
-// import Layout from "./Utils/Layout";
-// import ProtectedRoute from "./Utils/ProtectedRoute";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import CheckoutSucess from "./Components/CheckoutSuccess/CheckoutSucess";
-import AdminRoute from "./Utils/AdminRoute";
+import User from "./Admin/User";
+
+import { useSelector } from "react-redux";
 
 axios.defaults.withCredentials = true;
 
@@ -29,41 +29,49 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+  const { isAuthenticated, role } = useSelector((state) => state.user);
 
   return (
     <>
       <Navbar />
-
       <Routes>
-        {/*public */}
-
-        {/* <Route path="/" element={<Layout />}> */}
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/alltour" element={<AllTours />} />
         <Route path="/tour/:id" element={<SingleTour />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/:id/:token" element={<ResetPassword />} />
-        <Route path="/success" element={<CheckoutSucess />} />
-        <Route path="/user" element={<UserProfile />} />
 
-        {/* admin route */}
+        <Route path="/login" element={isAuthenticated ? <Home /> : <Login />} />
+
         <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <Dashboard />
-            </AdminRoute>
-          }
+          path="/signup"
+          element={isAuthenticated ? <Home /> : <Register />}
         />
 
-        {/* unhandled Route */}
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/:id/:token" element={<ResetPassword />} />
+        <Route
+          path="/success/:tourId/:userId/:price"
+          element={<CheckoutSucess />}
+        />
+        <Route
+          path="/user"
+          element={isAuthenticated ? <UserProfile /> : <Login />}
+        />
+
+        <Route
+          exact
+          path="/admin"
+          element={role === "admin" ? <Dashboard /> : <Home />}
+        />
+        <Route
+          exact
+          path="/admin/user"
+          element={role === "admin" ? <User /> : <Home />}
+        />
         <Route path="*" element={<div>page notfound </div>} />
-        {/* </Route> */}
       </Routes>
-      <Footer />
+      {role === "user" ? <Footer /> : ""}
+    
       <ToastContainer />
     </>
   );

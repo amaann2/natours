@@ -101,17 +101,26 @@ exports.createUser = (req, res) => {
 
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
-exports.updateUser = factory.updateOne(User); //! do not update password with this
+// exports.updateUser = factory.updateOne(User); //! do not update password with this
 exports.deleteUser = factory.deleteOne(User);
 
+exports.updateUser = catchAsync(async (req, res, next) => {
+  // TODO : create error if the admin want to update anything other than role of user
+  if (req.body.password || req.body.name || req.body.email || req.body.photo) {
+    return next(new appError('You can only update the role', 400));
+  }
+  const filterBody = filterObj(req.body, 'role');
 
+  // TODO : update user document
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, filterBody, {
+    new: true,
+    runValidators: true,
+  });
 
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/users');
-//   },
-//   filename: (req, file, cb) => {
-//     const extension = file.mimetype.split('/')[1];
-//     cb(null, `user-${req.user.id}-${Date.now()}.${extension}`);
-//   },
-// });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser,
+    },
+  });
+});

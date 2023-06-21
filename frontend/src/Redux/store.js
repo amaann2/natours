@@ -6,7 +6,8 @@ import {
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import userReducer from "./User/userReducer";
+import { userReducer, getUser } from "./User/userReducer";
+
 import {
   singleTourReducer,
   topCheapTour,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   tour: singleTourReducer,
   toptour: topCheapTour,
   review: reviewReducer,
+  getUser: getUser,
 });
 const initialState = {};
 const middleware = [logger, thunk];

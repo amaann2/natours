@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const CheckoutSucess = () => {
   return (
     <div className="checkout-success ">
-
       <div className=" success-card">
         <div
           style={{
@@ -18,7 +17,6 @@ const CheckoutSucess = () => {
           <i className="checkmark">✓</i>
         </div>
         <div>
-
           <h1>Success</h1>
           <p>
             We received your purchase request;
@@ -26,8 +24,9 @@ const CheckoutSucess = () => {
           </p>
         </div>
         <div>
-
-          <button><Link to='/'>Go To Home</Link></button>
+          <button>
+            <Link to="/">Go To Home</Link>
+          </button>
         </div>
       </div>
     </div>

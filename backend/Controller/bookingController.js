@@ -1,13 +1,13 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const catchAsync = require('../utils/catchAsync');
 const Tour = require('./../Model/tourModel');
+const Booking = require('./../Model/bookingModel');
 exports.getChekoutSession = catchAsync(async (req, res) => {
   // TODO : get the currently booked tour
 
   const tour = await Tour.findById(req.params.tourId);
-  console.log(tour.imageCover);
   const image = `http://localhost:8000/img/tours/${tour.imageCover}`;
-  console.log(image);
+
   // TODO : create checkout session
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -37,7 +37,21 @@ exports.getChekoutSession = catchAsync(async (req, res) => {
 
   res.status(200).json({
     status: 'success',
-    // url: session.url,
     id: session.id,
   });
 });
+
+// exports.createBookingCheckout = catchAsync(async (req, res, next) => {
+//   const { tourId, userId, price } = req.params;
+//   console.log(req.params);
+//   // if (!tourId && !userId && !price) return next();
+//   const booking = await Booking.create({
+//     tour: tourId,
+//     user: userId,
+//     price: price,
+//   });
+//   res.status(200).json({
+//     status: 'success',
+//     booking,
+//   });
+// });

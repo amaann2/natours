@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   role: null,
 };
 
-const userReducer = (state = INITIAL_STATE, action) => {
+export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case userActionType.set_CURRENT_USER:
       return {
@@ -53,4 +53,29 @@ const userReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default userReducer;
+export const getUser = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case userActionType.GET_ALL_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case userActionType.GET_ALL_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.payload,
+      };
+
+    case userActionType.GET_ALL_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+

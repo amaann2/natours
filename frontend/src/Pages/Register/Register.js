@@ -31,6 +31,8 @@ const Register = ({ setCurrentUser }) => {
       });
       navigate("/");
     } catch (error) {
+      setLoading(false);
+
       toast.error(error.response.data.message);
     }
   };
@@ -61,6 +63,7 @@ const Register = ({ setCurrentUser }) => {
           <input
             type="text"
             name="name"
+            required
             value={inputValue.name}
             onChange={handleChange}
             placeholder="NAME"
@@ -68,6 +71,7 @@ const Register = ({ setCurrentUser }) => {
           <input
             type="email"
             name="email"
+            required
             value={inputValue.email}
             onChange={handleChange}
             placeholder="USERNAME"
@@ -75,6 +79,7 @@ const Register = ({ setCurrentUser }) => {
           <input
             type="password"
             name="password"
+            required
             value={inputValue.password}
             onChange={handleChange}
             placeholder="PASSWORD"
@@ -82,6 +87,7 @@ const Register = ({ setCurrentUser }) => {
           <input
             type="password"
             name="confirmPassword"
+            required
             value={inputValue.confirmPassword}
             onChange={handleChange}
             placeholder="CONFIRM PASSWORD"

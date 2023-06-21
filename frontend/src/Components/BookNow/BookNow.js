@@ -21,11 +21,6 @@ const BookNow = () => {
         `/api/v1/bookings/checkout-session/${tour.id}`,
         { withCredentials: true }
       );
-      //   if (res.data.url) {
-      //       console.log(res.data);
-      //     window.location.href = res.data.url;
-      //   }
-
       if (res.data.id) {
         await stripe.redirectToCheckout({
           sessionId: res.data.id,
@@ -34,6 +29,7 @@ const BookNow = () => {
     } catch (error) {
       console.log(error.response.data.message);
     }
+
   };
   return (
     <div className="book-now">

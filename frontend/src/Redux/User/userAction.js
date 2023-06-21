@@ -49,24 +49,24 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-// export const loginUser = (inputValue) => async (dispatch) => {
-//   console.log(inputValue);
+//? GET ALL USER --- ADMIN
 
-//   try {
-//     dispatch({
-//       type: userActionType.LOGIN_USER_REQUEST,
-//     });
-
-//     const res = await axios.get("/api/v1/users/login", inputValue);
-//     console.log(res.data);
-//     dispatch({
-//       type: userActionType.LOGIN_USER_SUCCESS,
-//       payload: res.data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: userActionType.LOGIN_USER_FAIL,
-//       payload: error.response.data.message,
-//     });
-//   }
-// };
+export const getAllUser = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: userActionType.GET_ALL_USER_REQUEST,
+    });
+    const { data } = await axios.get("/api/v1/users", {
+      withCredentials: true,
+    });
+    dispatch({
+      type: userActionType.GET_ALL_USER_SUCCESS,
+      payload: data.data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: userActionType.GET_ALL_USER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};

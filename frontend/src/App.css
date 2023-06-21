@@ -81,8 +81,15 @@ ul {
     width: 20px;
 }
 
+.MuiDataGrid-columnHeaders .MuiDataGrid-withBorderColor {
+    background-color: var(--DarkType);
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 @media screen and (max-width:800px) {
-    .container{
+    .container {
         padding-left: 50px;
         padding-right: 50px;
     }

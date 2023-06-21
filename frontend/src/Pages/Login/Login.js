@@ -22,8 +22,10 @@ const Login = ({ setCurrentUser }) => {
       setCurrentUser(res.data);
       setLoading(false);
       toast.success(res.data.status);
+      window.location.reload();
       navigate("/");
     } catch (error) {
+      setLoading(false);
       toast.error(error.response.data.message);
     }
   };
@@ -54,6 +56,7 @@ const Login = ({ setCurrentUser }) => {
           <input
             type="email"
             name="email"
+            required
             value={inputValue.email}
             onChange={handleChange}
             placeholder="USERNAME"
@@ -61,6 +64,7 @@ const Login = ({ setCurrentUser }) => {
           <input
             type="password"
             name="password"
+            required
             value={inputValue.password}
             onChange={handleChange}
             placeholder="PASSWORD"

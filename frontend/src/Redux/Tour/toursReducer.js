@@ -1,4 +1,4 @@
-import { tourActionType } from './toursActionType';
+import { tourActionType } from "./toursActionType";
 const INITIAL_STATE = {
   tours: [],
 };
@@ -31,7 +31,6 @@ export const singleTourReducer = (state = { tour: [] }, action) => {
       return {
         loading: true,
         tour: [],
-        
       };
     case tourActionType.TOUR_SUCCESS:
       return {
@@ -47,7 +46,7 @@ export const singleTourReducer = (state = { tour: [] }, action) => {
       return state;
   }
 };
-export const topCheapTour = (state = {topTour: [] }, action) => {
+export const topCheapTour = (state = { topTour: [] }, action) => {
   switch (action.type) {
     case tourActionType.TOP_TOUR_REQUEST:
       return {

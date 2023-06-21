@@ -27,6 +27,7 @@ const ResetPassword = ({ setCurrentUser }) => {
       navigate("/");
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       toast.error(error.response.data.message);
     }
   };
@@ -56,6 +57,7 @@ const ResetPassword = ({ setCurrentUser }) => {
           <input
             type="password"
             name="password"
+            required
             value={inputValue.password}
             onChange={handleChange}
             placeholder="PASSWORD"
@@ -63,6 +65,7 @@ const ResetPassword = ({ setCurrentUser }) => {
           <input
             type="password"
             name="confirmPassword"
+            required
             value={inputValue.confirmPassword}
             onChange={handleChange}
             placeholder="CONFIRM PASSWORD"

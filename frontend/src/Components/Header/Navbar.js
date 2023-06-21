@@ -10,7 +10,9 @@ const Header = () => {
   const toggleNav = () => {
     setNavIsOpen(!navIsOpen);
   };
-  const { isAuthenticated, currentUser } = useSelector((state) => state.user);
+  const { isAuthenticated, currentUser, role } = useSelector(
+    (state) => state.user
+  );
 
   const dispatch = useDispatch();
   const logoutUser = () => {
@@ -29,10 +31,26 @@ const Header = () => {
         <li className="nav-link">
           <Link to="/alltour">Tour</Link>
         </li>
+
         <li className="nav-link">
           <Link to="/about">About</Link>
         </li>
 
+        {role === "admin" ? (
+          <>
+            <li className="nav-link">
+              <Link to="/admin">Dashboard</Link>
+            </li>
+            <li className="nav-link">
+              <Link to="/admin">Manage Tour</Link>
+            </li>
+            <li className="nav-link">
+              <Link to="/admin/user">User</Link>
+            </li>
+          </>
+        ) : (
+          <></>
+        )}
         {isAuthenticated ? (
           <>
             <li className="nav-link">
