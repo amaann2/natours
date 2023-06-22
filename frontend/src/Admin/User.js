@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "../Redux/User/userAction";
 import { toast } from "react-toastify";
@@ -7,13 +7,10 @@ import { TailSpin } from "react-loader-spinner";
 import { Avatar, Box, Typography } from "@mui/material";
 import UserAction from "./UserAction";
 
-
-
 const User = () => {
   const dispatch = useDispatch();
   const { users, error, loading } = useSelector((state) => state.getUser);
-  const [rowId, setRowId] = useState(null)
-
+  const [rowId, setRowId] = useState(null);
 
   useEffect(() => {
     if (error) toast.error(error);
@@ -42,23 +39,26 @@ const User = () => {
     },
     { field: "_id", headerName: "id", width: 220 },
     {
-      field: "actions", headerName: "Actions", type: 'actions', width: 100 , renderCell: (params) => (
-        <UserAction {...{ params, rowId, setRowId }} />
-      )
+      field: "actions",
+      headerName: "Actions",
+      type: "actions",
+      width: 100,
+      renderCell: (params) => <UserAction {...{ params, rowId, setRowId }} />,
     },
-    [rowId]
+    [rowId],
   ];
   return (
-    <div className="container" style={{ marginTop: '2rem' }}>
+    <div className="container" style={{ marginTop: "2rem" }}>
       <Box
         sx={{
           height: 530,
-          width: '100%'
-        }}>
+          width: "100%",
+        }}
+      >
         <Typography
           variant="h4"
-          component='h4'
-          sx={{ textAlign: 'center', mt: 2, mb: 2 }}
+          component="h4"
+          sx={{ textAlign: "center", mt: 2, mb: 2 }}
         >
           Users
         </Typography>
@@ -80,14 +80,13 @@ const User = () => {
             getRowId={(row) => row._id}
             rowsPerPageOptions={[2, 3, 4]}
             pageSize={5}
-            getRowSpacing={params => ({
+            getRowSpacing={(params) => ({
               top: params.isFirstVisible ? 0 : 5,
-              bottom: params.isLastVisible ? 0 : 5
+              bottom: params.isLastVisible ? 0 : 5,
             })}
             onCellEditStop={(params) => {
               setRowId(params.id);
             }}
-
           />
         )}
       </Box>

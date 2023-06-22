@@ -67,3 +67,29 @@ export const topCheapTour = (state = { topTour: [] }, action) => {
       return state;
   }
 };
+
+export const createTourReducer = (state = { newTour: [] }, action) => {
+  switch (action.type) {
+    case tourActionType.CREATE_TOUR_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case tourActionType.CREATE_TOUR_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        newTour: action.payload,
+      };
+
+    case tourActionType.CREATE_TOUR_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

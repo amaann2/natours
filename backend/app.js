@@ -75,7 +75,6 @@ app.use(
 //? Serving the static file
 
 app.use(express.static(`${__dirname}/public`));
-// app.use(express.static(`build`));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //? routing

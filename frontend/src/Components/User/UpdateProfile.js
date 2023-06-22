@@ -12,7 +12,7 @@ const UpdateProfile = ({ currentUser, setCurrentUser }) => {
   const onFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-
+  console.log(selectedFile);
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();

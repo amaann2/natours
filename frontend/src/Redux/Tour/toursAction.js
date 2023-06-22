@@ -1,13 +1,19 @@
 import { tourActionType } from "./toursActionType";
 import axios from "axios";
 
-export const getTours = () => async (dispatch) => {
+export const getTours = (name) => async (dispatch) => {
   try {
     dispatch({
       type: tourActionType.ALL_TOURS_REQUEST,
     });
-
-    const { data } = await axios.get(`/api/v1/tours`);
+    let link;
+    if (name) {
+      link = `/api/v1/tours?name=${name}`;
+    } else {
+      link = `/api/v1/tours`;
+    }
+    console.log(link);
+    const { data } = await axios.get(link);
     dispatch({
       type: tourActionType.ALL_TOURS_SUCCESS,
       payload: data.data.data,
@@ -51,6 +57,28 @@ export const getTopThreeCheapTour = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: tourActionType.TOP_TOUR_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//? CREATE TOUR --- ADMIN
+
+export const createTour = (formData) => async (dispatch) => {
+  try {
+    dispatch({
+      type: tourActionType.CREATE_TOUR_REQUEST,
+    });
+    const res = await axios.post("/api/v1/tours", formData, {
+      withCredentials: true,
+    });
+    dispatch({
+      type: tourActionType.CREATE_TOUR_SUCCESS,
+      payload: res.data.data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: tourActionType.CREATE_TOUR_FAIL,
       payload: error.response.data.message,
     });
   }

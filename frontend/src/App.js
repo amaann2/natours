@@ -22,7 +22,8 @@ import CheckoutSucess from "./Components/CheckoutSuccess/CheckoutSucess";
 import User from "./Admin/User";
 
 import { useSelector } from "react-redux";
-
+import ManageTour from "./Admin/ManageTour/ManageTour";
+import AddTour from "./Admin/ManageTour/AddTour";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -65,13 +66,24 @@ function App() {
         />
         <Route
           exact
+          path="/admin/tour"
+          element={role === "admin" ? <ManageTour /> : <Home />}
+        />
+        <Route
+          exact
           path="/admin/user"
           element={role === "admin" ? <User /> : <Home />}
         />
+        <Route
+          exact
+          path="/admin/tour/add"
+          element={role === "admin" ? <AddTour /> : <Home />}
+        />
+
         <Route path="*" element={<div>page notfound </div>} />
       </Routes>
       {role === "user" ? <Footer /> : ""}
-    
+
       <ToastContainer />
     </>
   );
