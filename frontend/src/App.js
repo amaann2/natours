@@ -1,31 +1,31 @@
-import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useEffect } from "react";
+import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "./Components/Header/Navbar";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import AllTours from "./Pages/AllTour/AllTours";
 import Register from "./Pages/Register/Register";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Pages/ForgotPassword/ResetPassword";
 import Footer from "./Components/Footer/Footer";
 import SingleTour from "./Pages/SingleTour/SingleTour";
 import About from "./Pages/About/About";
-import { useEffect } from "react";
 import store from "./Redux/store";
 import { loadUser } from "./Redux/User/userAction";
-import axios from "axios";
 import Dashboard from "./Admin/Dashboard";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import CheckoutSucess from "./Components/CheckoutSuccess/CheckoutSucess";
 import User from "./Admin/User";
-
 import { useSelector } from "react-redux";
 import ManageTour from "./Admin/ManageTour/ManageTour";
 import AddTour from "./Admin/ManageTour/AddTour";
-axios.defaults.withCredentials = true;
 
+axios.defaults.withCredentials = true;
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());

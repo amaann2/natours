@@ -30,6 +30,7 @@ app.use(
 );
 
 app.options('*', cors());
+
 //? Set security Htpps headerss
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
@@ -89,6 +90,7 @@ app.use('/api/v1/bookings', bookingRouter);
 // app.all('*', (req, res, next) => {
 //   next(new appError(`can't find ${req.originalUrl} on this server`, 404));
 // });
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

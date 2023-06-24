@@ -68,14 +68,16 @@ export const topCheapTour = (state = { topTour: [] }, action) => {
   }
 };
 
-export const createTourReducer = (state = { newTour: [] }, action) => {
+export const manageAdminTour = (state = { newTour: [] }, action) => {
   switch (action.type) {
     case tourActionType.CREATE_TOUR_REQUEST:
+    case tourActionType.UPDATE_TOUR_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case tourActionType.CREATE_TOUR_SUCCESS:
+    case tourActionType.UPDATE_TOUR_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -83,6 +85,7 @@ export const createTourReducer = (state = { newTour: [] }, action) => {
       };
 
     case tourActionType.CREATE_TOUR_FAIL:
+    case tourActionType.UPDATE_TOUR_FAIL:
       return {
         ...state,
         loading: false,

@@ -28,6 +28,10 @@
     height: 3rem;
 }
 
+.search-bar a {
+    color: white;
+}
+
 /* add tour  */
 .Add-Tour {
     max-width: 1300px;
@@ -67,6 +71,40 @@ h4 {
     outline: none;
 }
 
+.table {
+    overflow-x: auto;
+    margin-top: 4rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgba(224, 224, 224, 1);
+}
+
+th {
+    background-color: var(--DarkType);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+th,
+td {
+    text-align: center;
+    padding: 0.6rem;
+    border: 1px solid rgba(224, 224, 224, 1);
+
+}
+
+td {
+    padding: 1.2rem;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 @media screen and (max-width:800px) {
     .search-bar .input {
         justify-content: center;
@@ -80,6 +118,14 @@ h4 {
     }
 
     .Add-Tour input {
+        width: 100%;
+    }
+
+    .Add-Tour button {
+        width: 100%;
+    }
+
+    .Add-Tour select {
         width: 100%;
     }
 }

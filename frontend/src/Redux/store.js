@@ -9,7 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { userReducer, getUser } from "./User/userReducer";
 
 import {
-  createTourReducer,
+  manageAdminTour,
   singleTourReducer,
   topCheapTour,
   toursReducer,
@@ -23,7 +23,7 @@ const reducer = combineReducers({
   toptour: topCheapTour,
   review: reviewReducer,
   getUser: getUser,
-  newTour: createTourReducer,
+  newTour: manageAdminTour,
 });
 const initialState = {};
 const middleware = [logger, thunk];

@@ -18,6 +18,7 @@ const AllTours = () => {
     }
     dispatch(getTours());
   }, [dispatch, error]);
+
   return (
     <div className="container">
       <div className="row">

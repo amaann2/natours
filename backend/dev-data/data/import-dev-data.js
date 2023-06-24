@@ -4,20 +4,8 @@ const dotenv = require('dotenv');
 const Tour = require('../../Model/tourModel');
 const User = require('../../Model/userModel');
 const Review = require('../../Model/reviewModel');
+const connectionToDatabase = require('../../db/db');
 
-dotenv.config({ path: './config.env' });
-const DB = process.env.DATABASE.replace(
-  '<password>',
-  process.env.DATABASE_PASSWORD
-);
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((con) => {
-    console.log('Database is connected succusefull at mongodb atlas 😊');
-  });
 const tour = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
 const user = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 const reviews = JSON.parse(
@@ -27,6 +15,7 @@ const reviews = JSON.parse(
 //import the data
 const importData = async () => {
   try {
+    await connectionToDatabase();
     await Tour.create(tour);
     await User.create(user, { validateBeforeSave: false });
     await Review.create(reviews);
@@ -40,6 +29,7 @@ const importData = async () => {
 //delete the data
 const deleteData = async () => {
   try {
+    await connectionToDatabase();
     await Tour.deleteMany();
     await User.deleteMany();
     await Review.deleteMany();
