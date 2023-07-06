@@ -9,9 +9,7 @@ const CheckoutSucess = () => {
           style={{
             borderRadius: 200,
             height: 200,
-            width: 200,
             background: "#F8FAF5",
-            margin: "0 auto",
           }}
         >
           <i className="checkmark">✓</i>

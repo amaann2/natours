@@ -33,3 +33,25 @@
 .box:nth-child(4) {
     background-color: #e55352;
 }
+
+
+
+.detail h3 {
+    font-size: 2rem;
+}
+
+.detail p {
+    font-size: 1rem;
+}
+
+.dashboard-icon {
+    font-size: 4rem;
+}
+
+.detail a {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

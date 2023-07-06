@@ -43,6 +43,12 @@ const Header = () => {
             <li className="nav-link">
               <Link to="/admin/user">User</Link>
             </li>
+            <li className="nav-link">
+              <Link to="/admin/booking">Booking</Link>
+            </li>
+            <li className="nav-link">
+              <Link to="/admin/review">Review</Link>
+            </li>
           </>
         ) : (
           <></>
