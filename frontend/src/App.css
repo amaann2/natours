@@ -90,7 +90,12 @@ ul {
 
 @media screen and (max-width:800px) {
     .container {
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
+
+    .col-3 {
+        min-width: 320px;
+    }
+
 }

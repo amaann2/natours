@@ -32,10 +32,6 @@ const Header = () => {
           <Link to="/alltour">Tour</Link>
         </li>
 
-        <li className="nav-link">
-          <Link to="/about">About</Link>
-        </li>
-
         {role === "admin" ? (
           <>
             <li className="nav-link">

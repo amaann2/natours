@@ -17,10 +17,10 @@ import SingleTour from "./Pages/SingleTour/SingleTour";
 import About from "./Pages/About/About";
 import store from "./Redux/store";
 import { loadUser } from "./Redux/User/userAction";
-import Dashboard from "./Admin/Dashboard";
+import Dashboard from "./Admin/Dashboard/Dashboard";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import CheckoutSucess from "./Components/CheckoutSuccess/CheckoutSucess";
-import User from "./Admin/User";
+import User from "./Admin/ManageUser/User";
 import { useSelector } from "react-redux";
 import ManageTour from "./Admin/ManageTour/ManageTour";
 import AddTour from "./Admin/ManageTour/AddTour";
@@ -37,7 +37,6 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
         <Route path="/alltour" element={<AllTours />} />
         <Route path="/tour/:id" element={<SingleTour />} />
 
@@ -50,10 +49,7 @@ function App() {
 
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/:id/:token" element={<ResetPassword />} />
-        <Route
-          path="/success/:tourId/:userId/:price"
-          element={<CheckoutSucess />}
-        />
+        <Route path="/success" element={<CheckoutSucess />} />
         <Route
           path="/user"
           element={isAuthenticated ? <UserProfile /> : <Login />}
@@ -82,7 +78,7 @@ function App() {
 
         <Route path="*" element={<div>page notfound </div>} />
       </Routes>
-      {role === "user" ? <Footer /> : ""}
+      <Footer />
 
       <ToastContainer />
     </>

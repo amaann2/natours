@@ -12,7 +12,6 @@ const UpdateProfile = ({ currentUser, setCurrentUser }) => {
   const onFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-  console.log(selectedFile);
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
@@ -32,7 +31,6 @@ const UpdateProfile = ({ currentUser, setCurrentUser }) => {
       setEmail("");
       setName("");
     } catch (error) {
-      // console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }
   };

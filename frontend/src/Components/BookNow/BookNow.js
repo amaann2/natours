@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Link } from "react-router-dom";
+import PayButton from "../PayButton/PayButton";
 const stripe = await loadStripe(
   "pk_test_51MeJt3SJ6p54l9omPgb5AncZiaSDLWeAo2fHshhtiQQtFEsMnrwtBaclaywkiNnJeRzSJaHlIWahDqkqz2q6Y9YN00C9HVhIbt"
 );
@@ -29,7 +30,6 @@ const BookNow = () => {
     } catch (error) {
       console.log(error.response.data.message);
     }
-
   };
   return (
     <div className="book-now">
@@ -43,9 +43,7 @@ const BookNow = () => {
           </div>
           <div className="col-2">
             {isAuthenticated ? (
-              <button className="btn-book-now" onClick={bookTour}>
-                Book now
-              </button>
+              <PayButton tour={tour} />
             ) : (
               <button className="btn-book-now">
                 <Link to={"/login"}>Login Now to book</Link>

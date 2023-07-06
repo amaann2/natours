@@ -3,7 +3,7 @@ import React from "react";
 const TourDetailInput = ({ inputData, handleChange }) => {
   return (
     <>
-      <h4>Tour Detail</h4>
+      <h4>Tour Detail --- *required</h4>
       <hr />
       <input
         type="text"

@@ -14,6 +14,7 @@ const appError = require('./utils/appError');
 const globalErrorHandler = require('./Controller/globalErrorController');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const { webHooks } = require('./Controller/stripe');
 const app = express();
 
 //? parsing cookies from incoming requests
@@ -46,7 +47,10 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   message: ' Too many Requests from this IP, please try again in an hour !',
 });
+
 app.use('/api', limiter);
+
+app.post('/webhook', express.raw({ type: 'application/json' }), webHooks);
 
 //? body-parser , reading data from the body into req.body
 app.use(express.json({ limit: '10kb' }));
@@ -79,17 +83,15 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //? routing
-
+app.use('/api/v1/bookings', bookingRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reveiwRouter);
-app.use('/api/v1/bookings', bookingRouter);
-
 //? unhandled route
 
-// app.all('*', (req, res, next) => {
-//   next(new appError(`can't find ${req.originalUrl} on this server`, 404));
-// });
+app.all('*', (req, res, next) => {
+  next(new appError(`can't find ${req.originalUrl} on this server`, 404));
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

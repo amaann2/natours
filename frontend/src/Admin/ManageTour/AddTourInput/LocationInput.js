@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const LocationInput = ({ locations, setLoactions }) => {
+const LocationInput = ({ locations, setLoactions, tour }) => {
   const [locationInputData, setLocationInputData] = useState({
     coordinates: [],
     address: "",
@@ -42,6 +42,7 @@ const LocationInput = ({ locations, setLoactions }) => {
 
     setLoactions((prevLocations) => [...prevLocations, newLocation]);
   };
+  console.log(tour?.locations)
 
   return (
     <>
@@ -83,12 +84,31 @@ const LocationInput = ({ locations, setLoactions }) => {
         placeholder="day"
         value={locationInputData.day}
         onChange={handleChangeLocation}
-      />{" "}
+      />
       <br />
       <button onClick={handleLocationClick} name="addButton">
-        add
+        Add
       </button>
-      {locations && locations.map((loc) => <h1>{loc.address}</h1>)}
+      <table>
+        <tr>
+          <th>Latitude</th>
+          <th>Longitue</th>
+          <th>address</th>
+          <th>description</th>
+          <th>day</th>
+        </tr>
+
+        {locations && locations.map((loc) => (
+          <tr>
+            <td>{loc?.coordinates[0]}</td>
+            <td>{loc?.coordinates[1]}</td>
+            <td>{loc?.description}</td>
+            <td>{loc?.address}</td>
+            <td>{loc?.day}</td>
+          </tr>
+        ))}
+
+      </table>
     </>
   );
 };

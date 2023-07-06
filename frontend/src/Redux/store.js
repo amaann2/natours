@@ -15,6 +15,7 @@ import {
   toursReducer,
 } from "./Tour/toursReducer";
 import { reviewReducer } from "./Review/reviewReducer";
+import { bookingReducer } from "./Booking/bookingReducer";
 
 const reducer = combineReducers({
   user: userReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   review: reviewReducer,
   getUser: getUser,
   newTour: manageAdminTour,
+  booking: bookingReducer,
 });
 const initialState = {};
 const middleware = [logger, thunk];

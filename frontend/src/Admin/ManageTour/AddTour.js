@@ -13,10 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { TailSpin } from "react-loader-spinner";
 
-
-
 const AddTour = () => {
-
   const dispatch = useDispatch();
   const location = useLocation();
   const { users } = useSelector((state) => state.getUser);
@@ -27,7 +24,7 @@ const AddTour = () => {
   const [secondImage, setSecondImage] = useState(null);
   const [thirdImage, setThirdImage] = useState(null);
   const [locations, setLoactions] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const [inputData, SetInputData] = useState({
     name: tour?.name || "",
@@ -41,7 +38,6 @@ const AddTour = () => {
     guides: "",
   });
 
-
   const onFileChange = (e) => {
     setCoverImages(e.target.files[0]);
   };
@@ -53,7 +49,6 @@ const AddTour = () => {
       [name]: value,
     });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,37 +79,37 @@ const AddTour = () => {
 
     if (isEdit) {
       try {
-        setLoading(true)
-        const res = await axios.patch(`/api/v1/tours/${tour._id}`, formData, { withCredentials: true })
-        toast.success(res.data.status, { position: 'bottom-center' })
-        setLoading(false)
+        setLoading(true);
+        const res = await axios.patch(`/api/v1/tours/${tour._id}`, formData, {
+          withCredentials: true,
+        });
+        toast.success(res.data.status, { position: "bottom-center" });
+        setLoading(false);
       } catch (error) {
-        toast.error(error.response.data.message, { position: 'bottom-center' })
-        setLoading(false)
+        toast.error(error.response.data.message, { position: "bottom-center" });
+        setLoading(false);
       }
     } else {
       try {
-        setLoading(true)
-        const res = await axios.post('/api/v1/tours', formData, { withCredentials: true })
-        toast.success(res.data.status, { position: 'bottom-center' })
-        setLoading(false)
+        setLoading(true);
+        const res = await axios.post("/api/v1/tours", formData, {
+          withCredentials: true,
+        });
+        toast.success(res.data.status, { position: "bottom-center" });
+        setLoading(false);
       } catch (error) {
-        toast.error(error.response.data.message, { position: 'bottom-center' })
-        setLoading(false)
+        toast.error(error.response.data.message, { position: "bottom-center" });
+        setLoading(false);
       }
-
     }
-
   };
   useEffect(() => {
     dispatch(getAllUser());
   }, [dispatch]);
 
-
-
   return (
     <div className="Add-Tour">
-      {loading ?
+      {loading ? (
         <TailSpin
           height="80"
           width="80"
@@ -125,21 +120,34 @@ const AddTour = () => {
           wrapperClass=""
           visible={true}
         />
-        :
+      ) : (
         <form onSubmit={handleSubmit}>
           <TourDetailInput handleChange={handleChange} inputData={inputData} />
           <CoverImage onFileChange={onFileChange} />
-          <ImagesInput setFirstImage={setFirstImage} setSecondImage={setSecondImage} setThirdImage={setThirdImage} />
-          <TourStartLocation locations={locations} setLoactions={setLoactions} />
-          <LocationInput locations={locations} setLoactions={setLoactions} />
+          <ImagesInput
+            setFirstImage={setFirstImage}
+            setSecondImage={setSecondImage}
+            setThirdImage={setThirdImage}
+          />
+          <TourStartLocation
+            locations={locations}
+            setLoactions={setLoactions}
+          />
+          <LocationInput
+            locations={locations}
+            setLoactions={setLoactions}
+            tour={tour}
+            isEdit={isEdit}
+          />
           <GuideInput users={users} handleChange={handleChange} />
           <hr />
-          <button type="submit"> {isEdit ? "Update Tour" : "Create Tour"}</button>
+          <button type="submit">
+            {isEdit ? "Update Tour" : "Create Tour"}
+          </button>
         </form>
-      }
+      )}
     </div>
   );
 };
 
 export default AddTour;
-

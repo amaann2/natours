@@ -12,7 +12,7 @@ const ManageTour = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { tours, loading } = useSelector((state) => state.tours);
-  const [search, setSearch] = useState(" ");
+  const [search, setSearch] = useState("");
   const [filterTour, setFilterTour] = useState(tours);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
@@ -58,8 +58,6 @@ const ManageTour = () => {
           color="#4fa94d"
           ariaLabel="tail-spin-loading"
           radius="1"
-          wrapperStyle={{}}
-          wrapperClass=""
           visible={true}
         />
       ) : (
@@ -80,7 +78,7 @@ const ManageTour = () => {
               </button>
             </div>
           </div>
-          <div className="table">
+          <div className="table" style={{ marginBottom: "5rem" }}>
             <table>
               <tr>
                 <th>Id</th>

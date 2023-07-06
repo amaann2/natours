@@ -1,0 +1,35 @@
+.dashboard {
+    margin-top: 2rem;
+    max-width: 1500px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.box {
+    color: white;
+    height: 13rem;
+    border-radius: 10px;
+    margin: .4rem;
+    width: 21rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.box:nth-child(1) {
+    background-color: var(--DarkType);
+}
+
+.box:nth-child(2) {
+    background-color: #3399ff;
+}
+
+.box:nth-child(3) {
+    background-color: #f9b116;
+}
+
+.box:nth-child(4) {
+    background-color: #e55352;
+}
