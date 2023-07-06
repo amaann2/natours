@@ -89,9 +89,9 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reveiwRouter);
 //? unhandled route
 
-app.all('*', (req, res, next) => {
-  next(new appError(`can't find ${req.originalUrl} on this server`, 404));
-});
+// app.all('*', (req, res, next) => {
+//   next(new appError(`can't find ${req.originalUrl} on this server`, 404));
+// });
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
