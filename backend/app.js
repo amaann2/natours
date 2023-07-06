@@ -83,10 +83,10 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.static(path.join(__dirname, 'build')));
 
 //? routing
-app.use('/api/v1/bookings', bookingRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reveiwRouter);
+app.use('/api/v1/bookings', bookingRouter);
 //? unhandled route
 
 // app.all('*', (req, res, next) => {

@@ -16,7 +16,7 @@ const FeaturedTour = () => {
   }, [dispatch, error]);
   return (
     <div className="container">
-      <h2 className="container-heading">Featured Tour</h2>
+      <h2 className="container-heading">Top 3 Cheap Tour</h2>
       <div className="row">
         {topTour &&
           topTour.map((data) => (

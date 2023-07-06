@@ -4,21 +4,23 @@ import { useDispatch } from "react-redux";
 import { getUserBooking } from "../../Redux/Booking/bookingAction";
 import { TailSpin } from "react-loader-spinner";
 import { toast } from "react-toastify";
-import TourCard from './../TourCard/TourCard'
+import TourCard from "./../TourCard/TourCard";
+import { Link } from "react-router-dom";
 const MyBooking = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { booking, loading, error } = useSelector((state) => state.booking);
-  console.log(booking)
+  console.log(booking);
   useEffect(() => {
     dispatch(getUserBooking(currentUser?._id));
     if (error) {
-      toast.error(error)
+      toast.error(error);
     }
   }, [dispatch, currentUser, error]);
   return (
     <>
-      {loading ?
+      <h3 className="booking-heading">My Book Tour</h3>
+      {loading ? (
         <TailSpin
           height="80"
           width="80"
@@ -29,18 +31,17 @@ const MyBooking = () => {
           wrapperClass=""
           visible={true}
         />
-        :
-        booking <= 0 ? 'no booked' :
-          booking.map(order => (
-            <>
-              <h3 className="booking-heading">My Book Tour</h3>
-              <TourCard data={order?.tour} />
-            </>
-          ))
-
-      }
+      ) : booking <= 0 ? (
+        <h3 className="booking-heading">No Booked Tour !!<Link to={'/alltour'}>Upcoming  event</Link></h3>
+      ) : (
+        booking.map((order) => (
+          <>
+            <TourCard data={order?.tour} />
+          </>
+        ))
+      )}
     </>
-  )
+  );
 };
 
 export default MyBooking;

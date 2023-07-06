@@ -20,6 +20,7 @@ class APIFeatures {
 
   sort() {
     if (this.queryString.sort) {
+      console.log(this.queryString.sort);
       const sortBy = this.queryString.sort.split(',').join(' '); //multiple sort field
       this.query = this.query.sort(sortBy);
     } else {
@@ -30,6 +31,7 @@ class APIFeatures {
   limitFields() {
     if (this.queryString.fields) {
       const fields = this.queryString.fields.split(',').join(' ');
+
       this.query = this.query.select(fields);
     } else {
       this.query = this.query.select('-__v');
@@ -38,7 +40,7 @@ class APIFeatures {
   }
   pagination() {
     let page = Number(this.queryString.page) || 1;
-    let limit = Number(this.queryString.limit) || 20;
+    let limit = Number(this.queryString.limit) || 1000000;
     let skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit);

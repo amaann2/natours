@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import "./Home.css";
 import FeaturedTour from "../../Components/FeaturedTour/FeaturedTour";
 import { Link } from "react-router-dom";
-import BookNow from "../../Components/BookNow/BookNow";
 import Testimonial from "../../Components/Testimonial/Testimonial";
 
 const Home = () => {
@@ -25,7 +24,6 @@ const Home = () => {
       </div>
       <FeaturedTour />
       <Testimonial />
-      <BookNow />
     </>
   );
 };

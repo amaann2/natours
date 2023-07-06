@@ -17,6 +17,13 @@
     color: white;
 }
 
+.spinner-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 800px) {
     .btn-book-now {
         margin-left: 0;
